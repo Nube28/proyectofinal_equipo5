@@ -1,10 +1,10 @@
 <resources>
     <!--
-        todo el texto del proyecto esta aqui y la estructura es Etiquieta_Nombre_Complemento
-        ctrl+r para buscar el texto si te da flojera
+        Todo el texto del proyecto está aquí y la estructura es Etiqueta_Nombre_Complemento
+        Ctrl+R para buscar el texto si te da flojera
      -->
     <string name="app_name">PlanificadorDeEventos</string>
-    <string name="title_main">¡BIENVENIDO A TU PLANEADOR DE EVENTOS!</string>
+    <string name="title_main">¡BIENVENIDO A TU PLANIFICADOR DE EVENTOS!</string>
     <string name="lb_email">Correo:</string>
     <string name="lb_name">Nombre:</string>
     <string name="lb_password">Contraseña:</string>
@@ -12,33 +12,32 @@
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_register">Registrar</string>
     <string name="btn_sign_in">Iniciar sesión</string>
-    <string name="btn_not_account_sign_up">¿Aun no tienes una cuenta? Registrate aqui!</string>
-    <string name="title_signup">REGISTRATE CON NOSOTROS :D</string>
+    <string name="btn_no_account_register">¿Aún no tienes una cuenta? ¡Regístrate aquí!</string>
+    <string name="title_signup">¡REGÍSTRATE CON NOSOTROS! :D</string>
     <string name="title_create_event">CREA TU EVENTO</string>
     <string name="lb_event_name">Nombre del evento:</string>
     <string name="lb_event_budget">Presupuesto (estimado) del evento:</string>
-    <string name="lb_event_description">Descripcion del evento:</string>
-    <string name="lb_optional">(opcional)</string>
+    <string name="lb_event_description">Descripción del evento:</string>
+    <string name="lb_optional">(Opcional)</string>
     <string name="lb_event_type">Tipo de evento:</string>
     <string name="title_account_config">Configuración de cuenta</string>
     <string name="btn_edit_profile">Editar perfil</string>
-    <string name="btn_singout">Cerrar Sesión</string>
-    <string name="btn_change_password">Cambiar Contraseña</string>
+    <string name="btn_signout">Cerrar sesión</string>
+    <string name="btn_change_password">Cambiar contraseña</string>
     <string name="title_budget">Presupuesto estimado</string>
     <string name="sym_money">$</string>
     <string name="title_list_task">Lista de tareas</string>
     <string name="btn_task">Tareas</string>
     <string name="btn_subtask">Subtareas</string>
-    <string name="btn_price">Comparación de precios</string>
     <string name="btn_event_overview">Resumen del evento</string>
     <string name="btn_price_comparation">Comparación de precios</string>
     <string name="title_subtask">Subtareas de:</string>
     <string name="title_create_task">CREA UNA NUEVA TAREA</string>
     <string name="lb_task_name">Nombre de la tarea:</string>
-    <string name="lb_task_description">Descripcion de la tarea:</string>
+    <string name="lb_task_description">Descripción de la tarea:</string>
     <string name="lb_task_budget">Presupuesto (estimado) de la tarea:</string>
-    <string name="title_price_comparation">COMPARACION DE PRECIOS</string>
-    <string name="lb_item_name">Nombre del articulo:</string>
+    <string name="title_price_comparation">COMPARACIÓN DE PRECIOS</string>
+    <string name="lb_item_name">Nombre del artículo:</string>
     <string name="lb_place">Lugar:</string>
     <string name="lb_cost">Costo:</string>
     <string name="title_event_overview">RESUMEN DEL EVENTO</string>
