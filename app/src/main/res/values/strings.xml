@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">PlanificadorDeEventos</string>
+    <string name="title_main">¡BIENVENIDO A TU PLANEADOR DE EVENTOS!</string>
+    <string name="lb_email">Correo:</string>
+    <string name="lb_name">Nombre:</string>
+    <string name="lb_password">Contraseña:</string>
+    <string name="lb_repeat_password">Confirmar contraseña:</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_register">Registrar</string>
+    <string name="btn_sign_in">Iniciar sesión</string>
+    <string name="btn_not_account_sign_up">¿Aun no tienes una cuenta? Registrate aqui!</string>
+    <string name="title_signup">REGISTRATE CON NOSOTROS :D</string>
+    <string name="title_create_event">CREA TU EVENTO</string>
+    <string name="lb_event_name">Nombre del evento:</string>
+    <string name="lb_budget">Presupuesto (estimado) del evento:</string>
+    <string name="lb_event_description">Descripcion del evento:</string>
+    <string name="lb_optional">(opcional)</string>
+    <string name="lb_event_type">Tipo de evento:</string>
+    <string name="title_account_config">Configuración de cuenta</string>
+    <string name="btn_edit_profile">Editar perfil</string>
+    <string name="btn_singout_account">Cerrar Sesión</string>
+    <string name="btn_change_password">Cambiar Contraseña</string>
+    <string name="lb_"></string>
+    <string name=""></string>
+
+</resources>
