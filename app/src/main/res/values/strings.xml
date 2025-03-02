@@ -17,6 +17,7 @@
     <string name="title_create_event">CREA TU EVENTO</string>
     <string name="lb_event_name">Nombre del evento:</string>
     <string name="lb_event_budget">Presupuesto (estimado) del evento:</string>
+
     <string name="lb_event_description">Descripción del evento:</string>
     <string name="lb_optional">(Opcional)</string>
     <string name="lb_event_type">Tipo de evento:</string>
@@ -45,4 +46,6 @@
     <string name="lb_real_budget">Presupuesto real</string>
     <string name="title_cost_comparative">Comparativa de costos</string>
     <string name="btn_place_list">Listado de lugares</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

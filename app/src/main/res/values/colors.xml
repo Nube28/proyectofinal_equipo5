@@ -4,8 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="beigeLight">#FFFAF2</color>
     <color name="orange">#D38301</color>
+    <color name="orangeLight">#F4A024</color>
     <color name="purpleMain">#A62991</color>
     <color name="purpleLight">#AA4E9B</color>
     <color name="yellowMain">#F9F0AF</color>
     <color name="yellowDarker">#F3EAA9</color>
+    <color name="darkerGray">#000</color>
 </resources>
