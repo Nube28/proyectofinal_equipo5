@@ -49,7 +49,7 @@
     <string name="lb_real_budget">Presupuesto real</string>
     <string name="title_cost_comparative">Comparativa de costos</string>
     <string name="btn_place_list">Listado de lugares</string>
-
+    <string name="btn_event_estadistic">Ver estadisticas del evento</string>
     <string name="eg_event_name">Fiesta de Bell</string>
     <string name="eg_event_budget">100000</string>
     <string name="eg_event_category">Fiesta</string>

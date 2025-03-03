@@ -7,7 +7,7 @@
     >
 
     <ImageView
-        android:id="@+id/event_img_overview"
+        android:id="@+id/event_iv_overview"
         android:layout_width="@dimen/img_event_overview"
         android:layout_height="@dimen/img_event_overview"
         android:layout_marginRight="@dimen/margin_normal"
@@ -55,6 +55,7 @@
                 />
         </LinearLayout>
         <TextView
+            android:id="@+id/event_category_overview"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="@dimen/low_size"

@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.PlanificadorDeEventos" parent="Theme.Material3.DayNight.NoActionBar">
-
+        <!-- no funciono el video :like: -->
+        <item name="android:statusBarColor" tools:targetApi="1">@color/purpleMain</item>
+        <item name="android:navigationBarColor">@color/purpleMain</item>
     </style>
-
-    <style name="Theme.PlanificadorDeEventos" parent="Base.Theme.PlanificadorDeEventos" />
 </resources>
