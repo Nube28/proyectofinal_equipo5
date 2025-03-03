@@ -7,7 +7,7 @@
     android:background="@color/beigeLight"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SignUp">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
@@ -17,22 +17,52 @@
         tools:layout="@layout/fragment_header_empty"
         />
 
-    <ImageView
-        android:layout_width="@dimen/img_logo_width"
-        android:layout_height="@dimen/img_logo_height"
-        android:layout_margin="@dimen/margin_normal"
-        android:src="@drawable/lain"
-        android:layout_gravity="center_horizontal"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="@dimen/title_sign_up_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:text="@string/title_signup"
+            android:textSize="@dimen/title_size"
+            android:textColor="@color/orange"
+            android:fontFamily="@string/typo_title"
+            tools:ignore="RtlCompat"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/img_cat_width"
+            android:layout_height="@dimen/img_cat_height"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:src="@drawable/lain"
+            />
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@string/typo_title"
-        android:text="@string/title_main"
-        android:textSize="@dimen/title_size"
-        android:textAlignment="center"
-        android:textColor="@color/orange"
+        android:fontFamily="@string/typo_normal_text"
+        android:text="@string/lb_name"
+        android:textSize="@dimen/text_size"
+        android:paddingLeft="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_low"
+        />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/typo_normal_text"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:hint="@string/hint_name"
+        android:inputType="textPersonName"
+
         />
 
     <TextView
@@ -41,7 +71,7 @@
         android:fontFamily="@string/typo_normal_text"
         android:text="@string/lb_email"
         android:textSize="@dimen/text_size"
-        android:paddingLeft="@dimen/margin_normal"
+        android:paddingStart="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_low"
         />
 
@@ -53,17 +83,15 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_email"
-        android:inputType="textEmailAddress"
-
+        android:inputType="textPassword"
         />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@string/typo_normal_text"
         android:text="@string/lb_password"
         android:textSize="@dimen/text_size"
-        android:paddingStart="@dimen/margin_normal"
+        android:paddingLeft="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_low"
         />
 
@@ -75,6 +103,28 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_password"
+        android:inputType="textEmailAddress"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/typo_normal_text"
+        android:text="@string/lb_repeat_password"
+        android:textSize="@dimen/text_size"
+        android:paddingStart="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_low"
+        />
+
+    <EditText
+        android:id="@+id/et_repeat_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/typo_normal_text"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:hint="@string/hint_repeat_password"
         android:inputType="textPassword"
         />
 
@@ -86,18 +136,8 @@
         android:textColor="@color/beigeLight"
         android:padding="10dp"
         android:layout_gravity="center"
-        android:text="@string/btn_sign_in"
+        android:text="@string/btn_register"
         android:layout_marginTop="@dimen/margin_low"
-        />
-
-    <TextView
-        android:id="@+id/btn_not_account_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:fontFamily="@string/typo_normal_text"
-        android:textColor="@color/orange_red"
-        android:text="@string/btn_no_account_register"
         />
 
 </LinearLayout>
