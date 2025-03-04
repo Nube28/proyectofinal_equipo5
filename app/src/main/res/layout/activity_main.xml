@@ -21,7 +21,7 @@
         android:layout_width="@dimen/img_logo_width"
         android:layout_height="@dimen/img_logo_height"
         android:layout_margin="@dimen/margin_normal"
-        android:src="@drawable/lain"
+        android:src="@drawable/logo"
         android:layout_gravity="center_horizontal"
         />
 

@@ -82,7 +82,13 @@ class EventOverviewAdapter: BaseAdapter {
         event_budget_overview.setText(eventOverview.event_budget_overview)
         event_category_overview.setText(eventOverview.event_category_overview)
 
-
+        view.setOnClickListener {
+            val intent = Intent(context, EventDetail::class.java)
+            intent.putExtra("eventName", eventOverview.event_name_overview)
+            intent.putExtra("eventBudget", eventOverview.event_budget_overview)
+            intent.putExtra("eventCategory", eventOverview.event_category_overview)
+            context!!.startActivity(intent)
+        }
 
         return view
     }
