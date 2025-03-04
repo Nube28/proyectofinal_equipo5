@@ -55,4 +55,19 @@
     <string name="eg_event_category">Fiesta</string>
     <string name="eg_task">Tarea</string>
     <string name="eg_subtask">Sub tarea</string>
+
+
+    <!-- este es el de las tareas y subtareas -->
+    <string name="hint_task_description">Descripcion</string>
+    <string name="hint_task_budget">Presupuesto</string>
+    <string name="title_create_subtask">CREA UNA NUEVA SUBTAREA</string>
+    <string name="lb_subtask_name">Nombre de la Subtarea:</string>
+    <string name="et_subtask_name">Subtarea</string>
+    <string name="btn_register_subtask">Registrar</string>
+    <string name="title_create_provider">AGREGA UN NUEVO PROVEEDOR</string>
+    <string name="lb_provider_name">Nombre del proveedor:</string>
+    <string name="hint_provider_name">Nombre del proveedor</string>
+    <string name="lb_product_price">Precio del producto:</string>
+    <string name="hint_product_price">Precio del producto</string>
+
 </resources>
