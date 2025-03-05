@@ -8,6 +8,7 @@
     android:background="@color/beigeLight"
     tools:context=".ChoseEvent"
     >
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/low_size"
             android:text="@string/btn_event_estadistic"
+            android:layout_marginBottom="@dimen/margin_low"
             android:textColor="@color/orange_red"
             android:textAlignment="center"
             />
@@ -115,23 +117,14 @@
 
     </LinearLayout>
 
-        <!-- ESTO DEFINITIVAMENTE NO QUEDARA ASI PERO NO SE COMO MOVERLE -->
-        <!-- ESTO DEFINITIVAMENTE NO QUEDARA ASI PERO NO SE COMO MOVERLE -->
-        <!-- ESTO DEFINITIVAMENTE NO QUEDARA ASI PERO NO SE COMO MOVERLE -->
-        <!-- ESTO DEFINITIVAMENTE NO QUEDARA ASI PERO NO SE COMO MOVERLE -->
-        <!-- ESTO DEFINITIVAMENTE NO QUEDARA ASI PERO NO SE COMO MOVERLE -->
-        <!-- AYUDA -->
-        <!-- el problema es que le backgroudn es el que quiere y
-         no me esta agarrando que sea de color purpleMain
-         ademas que tampoco hace que el + sea color beigeLight -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/btn_add_event"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|end"
-    android:layout_margin="16dp"
-    android:background="@color/purpleMain"
-    app:srcCompat="@android:drawable/ic_input_add"
-    android:tint="@color/beigeLight" />
+        android:id="@+id/btn_add_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/purpleMain"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:tint="@color/beigeLight" />
 
 </FrameLayout>

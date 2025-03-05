@@ -6,13 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beigeLight"
-    tools:context=".ChoseEvent"
-    >
+    tools:context=".TaskDetail">
+
+
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
 
         <androidx.fragment.app.FragmentContainerView
@@ -23,13 +24,10 @@
             tools:layout="@layout/fragment_header_profile"
             />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/list_view"
-            />
+
 
     </LinearLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_event"

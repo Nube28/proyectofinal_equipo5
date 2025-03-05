@@ -34,7 +34,7 @@ class ChoseEvent : AppCompatActivity() {
         val btn_add_event = findViewById(R.id.btn_add_event) as com.google.android.material.floatingactionbutton.FloatingActionButton
 
         btn_add_event.setOnClickListener{
-            //val intent: Intent = Intent(this, ::class.java)
+            //val intent: Intent = Intent(this, AddEvent::class.java) //cando la kat haga su pantalla
             //startActivity(intent)
         }
 

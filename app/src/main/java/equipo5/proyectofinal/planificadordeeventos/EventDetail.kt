@@ -1,6 +1,7 @@
 package equipo5.proyectofinal.planificadordeeventos
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +42,13 @@ class EventDetail : AppCompatActivity() {
         val adapter = TaskAdapter(this, tasks)
         listView.adapter = adapter
 
+        val btn_add_event = findViewById(R.id.btn_add_event) as com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        btn_add_event.setOnClickListener{
+            val intent: Intent = Intent(this, AddTask::class.java)
+            startActivity(intent)
+        }
+
     }
 }
 
@@ -78,7 +86,7 @@ class TaskAdapter(private val context: Context, private val taskList: MutableLis
         textMainTask.text = "${task.name} - ${task.cost}"
         checkBoxMain.isChecked = task.isChecked
         subTaskContainer.visibility = if (task.isExpanded) View.VISIBLE else View.GONE
-        arrowExpand.setImageResource(if (task.isExpanded) R.drawable.ic_arrow_down else R.drawable.ic_arrow_down)
+        arrowExpand.setImageResource(if (task.isExpanded) R.drawable.ic_arrow_down else R.drawable.ic_arrow_up)
 
 
         checkBoxMain.setOnCheckedChangeListener { _, isChecked ->
@@ -86,7 +94,8 @@ class TaskAdapter(private val context: Context, private val taskList: MutableLis
         }
 
         textMainTask.setOnClickListener {
-            Toast.makeText(context, "Tarea: ${task.name}", Toast.LENGTH_SHORT).show()
+            val intent: Intent = Intent(context, TaskDetail::class.java)
+            context.startActivity(intent)
         }
 
         arrowExpand.setOnClickListener {
