@@ -48,10 +48,10 @@
     <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@string/typo_normal_text"
+        android:layout_height="48dp"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
+        android:fontFamily="@string/typo_normal_text"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
 

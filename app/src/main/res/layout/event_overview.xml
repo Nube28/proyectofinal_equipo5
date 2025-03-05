@@ -65,7 +65,7 @@
     <ImageView
         android:layout_width="@dimen/img_arrow_right"
         android:layout_height="@dimen/img_arrow_right"
-        android:src="@drawable/lain"
+        android:src="@drawable/ic_arrow_left"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_low"
         />

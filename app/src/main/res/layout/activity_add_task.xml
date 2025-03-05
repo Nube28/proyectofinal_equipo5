@@ -3,30 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/beigeLight"
-    android:padding="@dimen/margin_low"
-    tools:context=".SubtaskCreation">
+    tools:context=".AddTask">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height"
-        android:name="equipo5.proyectofinal.planificadordeeventos.HeaderEmptyFragment"
-        tools:layout="@layout/fragment_header_empty" />
+        android:name="equipo5.proyectofinal.planificadordeeventos.HeaderProfile"
+        tools:layout="@layout/fragment_header_profile"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:layout_margin="@dimen/margin_low">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_create_subtask"
+            android:text="@string/title_create_task"
             android:textSize="@dimen/title_size"
             android:textColor="@color/orange"
             android:fontFamily="@string/typo_title"
@@ -45,29 +46,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/margin_low">
+        >
 
+        <!-- mira ruzz estos de aqui abajo son
+        los que vas a copiar y a pegar, cambiando
+        el id del EditText y asi queada bonito-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lb_subtask_name"
+            android:fontFamily="@string/typo_normal_text"
+            android:text="@string/lb_task_name"
             android:textSize="@dimen/text_size"
-            android:textStyle="bold" />
+            android:paddingLeft="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_low"
+            />
 
         <EditText
-            android:id="@+id/et_subtask_name"
+            android:id="@+id/et_task_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@string/typo_normal_text"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
             android:hint="@string/hint_name"
-            android:background="@android:color/white"
-            android:inputType="text" />
+            android:inputType="textPersonName"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lb_task_description"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold" />
+            />
 
         <EditText
             android:id="@+id/et_task_description"
@@ -94,7 +98,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_register_subtask"
+        android:id="@+id/btn_register_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_register"
@@ -103,4 +107,5 @@
         android:padding="10dp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_low" />
+</LinearLayout>
 </LinearLayout>

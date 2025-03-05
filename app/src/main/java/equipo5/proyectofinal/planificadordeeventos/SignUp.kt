@@ -1,6 +1,8 @@
 package equipo5.proyectofinal.planificadordeeventos
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +17,12 @@ class SignUp : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val btn_sign_in = findViewById(R.id.btn_sign_in) as Button
+        btn_sign_in.setOnClickListener{
+            val intent: Intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
