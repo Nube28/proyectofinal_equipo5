@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -75,7 +74,7 @@ class TaskAdapter(private val context: Context, private val taskList: MutableLis
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.main_tasks, parent, false)
+        val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.tasks_list, parent, false)
 
         val checkBoxMain = view.findViewById<CheckBox>(R.id.check_main_task)
         val textMainTask = view.findViewById<TextView>(R.id.text_main_task)
@@ -95,7 +94,10 @@ class TaskAdapter(private val context: Context, private val taskList: MutableLis
 
         textMainTask.setOnClickListener {
             val intent: Intent = Intent(context, TaskDetail::class.java)
+            //aqui seria q mandamos el id de la tarea para q se acedda ahi, o mandarlo en dtos, ya veremos
+            intent.putExtra("taskName", task.name)
             context.startActivity(intent)
+
         }
 
         arrowExpand.setOnClickListener {
@@ -106,7 +108,7 @@ class TaskAdapter(private val context: Context, private val taskList: MutableLis
         subTaskContainer.removeAllViews()
 
         for (subTask in task.subTasks) {
-            val subTaskView = LayoutInflater.from(context).inflate(R.layout.sub_task, subTaskContainer, false)
+            val subTaskView = LayoutInflater.from(context).inflate(R.layout.subtask_list, subTaskContainer, false)
             val checkBoxSubTask = subTaskView.findViewById<CheckBox>(R.id.check_sub_task)
             val textSubTask = subTaskView.findViewById<TextView>(R.id.text_sub_task)
 

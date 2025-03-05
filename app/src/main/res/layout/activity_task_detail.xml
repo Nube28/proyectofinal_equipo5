@@ -24,7 +24,23 @@
             tools:layout="@layout/fragment_header_profile"
             />
 
+        <TextView
+            android:id="@+id/task_name_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/title_size_max"
+            android:text="@string/eg_task"
+            android:fontFamily="@string/typo_normal_text"
+            android:textAlignment="center"
+            />
 
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_low"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:layout_marginLeft="@dimen/margin_normal"/>
 
     </LinearLayout>
 
