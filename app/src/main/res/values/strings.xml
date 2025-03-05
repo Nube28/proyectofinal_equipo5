@@ -70,4 +70,8 @@
     <string name="lb_product_price">Precio del producto:</string>
     <string name="hint_product_price">Precio del producto</string>
 
+    <!-- Kat / Perfil -->
+    <string name="tv_logoff"><u>Cerrar Sesión</u></string>
+
+
 </resources>
