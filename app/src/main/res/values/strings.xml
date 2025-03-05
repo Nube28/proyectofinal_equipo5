@@ -55,6 +55,10 @@
     <string name="eg_event_category">Fiesta</string>
     <string name="eg_task">Tarea</string>
     <string name="eg_subtask">Sub tarea</string>
+    <string name="event_title">Estadisticas del evento</string>
+    <string name="global_comparative">Comparativa de global</string>
+    <string name="choose_supplier">Elige a tu proveedor</string>
+
 
 
     <!-- este es el de las tareas y subtareas -->
