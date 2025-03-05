@@ -108,4 +108,3 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_low" />
 </LinearLayout>
-</LinearLayout>

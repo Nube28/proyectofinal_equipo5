@@ -13,6 +13,12 @@
         android:theme="@style/Base.Theme.PlanificadorDeEventos"
         tools:targetApi="31">
         <activity
+            android:name=".AddSupplier"
+            android:exported="false" />
+        <activity
+            android:name=".AddSubtask"
+            android:exported="false" />
+        <activity
             android:name=".AddTask"
             android:exported="false" />
         <activity
