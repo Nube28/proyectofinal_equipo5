@@ -18,10 +18,13 @@
     <string name="btn_sign_in">Iniciar sesión</string>
     <string name="btn_no_account_register">¿Aún no tienes una cuenta? ¡Regístrate aquí!</string>
     <string name="title_signup">¡REGÍSTRATE CON NOSOTROS! :D</string>
-    <string name="title_create_event">CREA TU EVENTO</string>
+    <string name="title_create_event">CREA TU \n EVENTO :3</string>
+    <string name="hint_create_event">Evento Solsticio</string>
     <string name="lb_event_name">Nombre del evento:</string>
-    <string name="lb_event_budget">Presupuesto (estimado) del evento:</string>
-    <string name="lb_event_description">Descripción del evento:</string>
+    <string name="lb_event_budget">Presupuesto (Estimado) del\nevento:</string>
+    <string name="hint_estimated_budget">30000</string>
+    <string name="lb_event_description">Descripción del evento (opcional):</string>
+    <string name="hint_event_description">Divertido!</string>
     <string name="lb_optional">(Opcional)</string>
     <string name="lb_event_type">Tipo de evento:</string>
     <string name="title_account_config">CONFIGURACIÓN DE\nLA CUENTA</string>
@@ -83,6 +86,11 @@
     <string name="email_profile">Correo electrónico:</string>
     <string name="hint_email_profile">example@gmail.com</string>
     <string name="button_save">Guardar</string>
+    <string name="title_password">Cambiar\nContraseña</string>
+    <string name="lb_new_password">Nueva contraseña:</string>
+    <string name="lb_old_password">Contraseña anterior:</string>
+    <string name="hint_new_password">********</string>
+    <string name="hint_old_password">***</string>
 
     <!-- Momez / detalles de la subtarea gad -->
     <string name="title_subtask_detail">Detalles de la subtarea</string>

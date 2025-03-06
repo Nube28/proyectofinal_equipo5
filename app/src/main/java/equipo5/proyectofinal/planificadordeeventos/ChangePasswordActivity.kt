@@ -8,14 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class EditProfileActivity : AppCompatActivity() {
+class ChangePasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_edit_profile)
+        setContentView(R.layout.activity_change_password)
 
-        val btn_guardar_perfil: Button = findViewById(R.id.btn_guardar_perfil) as Button
-        btn_guardar_perfil.setOnClickListener{
+        val btn_save_password: Button = findViewById(R.id.btn_save_password) as Button
+        btn_save_password.setOnClickListener{
             val intent: Intent = Intent(this, AccountConfig::class.java)
             startActivity(intent)
         }
