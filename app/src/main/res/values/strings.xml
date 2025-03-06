@@ -24,9 +24,9 @@
     <string name="lb_event_description">Descripción del evento:</string>
     <string name="lb_optional">(Opcional)</string>
     <string name="lb_event_type">Tipo de evento:</string>
-    <string name="title_account_config">Configuración de cuenta</string>
+    <string name="title_account_config">CONFIGURACIÓN DE\nLA CUENTA</string>
     <string name="btn_edit_profile">Editar perfil</string>
-    <string name="btn_signout">Cerrar sesión</string>
+    <string name="btn_signout"><u>Cerrar Sesión</u></string>
     <string name="btn_change_password">Cambiar contraseña</string>
     <string name="title_budget">Presupuesto estimado</string>
     <string name="sym_money">$</string>
@@ -59,8 +59,6 @@
     <string name="global_comparative">Comparativa de global</string>
     <string name="choose_supplier">Elige a tu proveedor</string>
 
-
-
     <!-- este es el de las tareas y subtareas -->
     <string name="hint_task_description">Descripcion</string>
     <string name="hint_task_budget">Presupuesto</string>
@@ -75,7 +73,10 @@
     <string name="hint_product_price">Precio del producto</string>
 
     <!-- Kat / Perfil -->
-    <string name="tv_logoff"><u>Cerrar Sesión</u></string>
-
+    <string name="name_profile">Nombre:</string>
+    <string name="hint_name_profile">Default.</string>
+    <string name="email_profile">Correo electrónico:</string>
+    <string name="hint_email_profile">example@gmail.com</string>
+    <string name="button_save">Guardar</string>
 
 </resources>
