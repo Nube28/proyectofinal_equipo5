@@ -13,7 +13,10 @@
     <dimen name="title_size">25sp</dimen>
     <dimen name="text_size">20sp</dimen>
     <dimen name="low_size">15sp</dimen>
+    <dimen name="medium_text_size">20sp</dimen>
+    <dimen name="ultra_low_size">13sp</dimen>
     <dimen name="margin_normal">40dp</dimen>
     <dimen name="margin_low">10dp</dimen>
     <dimen name="img_sale_point">65dp</dimen>
+
 </resources>

@@ -39,6 +39,12 @@
         <activity
             android:name=".SignUp"
             android:exported="false" />
+        <activity android:name=".EventStatistics"
+            android:exported="false"/>
+        <activity android:name=".SelectSupplier"
+            android:exported="false"/>
+        <activity android:name=".SalePoint"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

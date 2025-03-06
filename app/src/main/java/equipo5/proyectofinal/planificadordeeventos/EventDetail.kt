@@ -33,10 +33,17 @@ class EventDetail : AppCompatActivity() {
             TaskItem("Comida", "$800", subTasks = listOf(
                 SubTaskItem("Platos", "$50"),
                 SubTaskItem("Lechugas", "$50")
+
             )),
             TaskItem("Sillas", "$1800", subTasks = listOf()),
             TaskItem("Mesas", "$2800", subTasks = listOf())
         )
+
+        val btn_event_estadistic: TextView = findViewById(R.id.btn_event_estadistic)
+        btn_event_estadistic.setOnClickListener {
+            val intent: Intent = Intent(this, EventStatistics::class.java)
+            startActivity(intent)
+        }
 
         val adapter = TaskAdapter(this, tasks)
         listView.adapter = adapter
