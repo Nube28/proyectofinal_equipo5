@@ -15,4 +15,5 @@
     <dimen name="low_size">15sp</dimen>
     <dimen name="margin_normal">40dp</dimen>
     <dimen name="margin_low">10dp</dimen>
+    <dimen name="img_sale_point">65dp</dimen>
 </resources>

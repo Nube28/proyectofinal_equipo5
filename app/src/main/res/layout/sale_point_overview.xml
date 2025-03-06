@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/beigeLight"
+    android:orientation="horizontal"
+    >
+
+    <ImageView
+        android:layout_width="@dimen/img_sale_point"
+        android:layout_height="@dimen/img_sale_point"
+        android:layout_marginLeft="@dimen/margin_low"
+        android:layout_marginTop="@dimen/margin_low"
+        android:layout_marginRight="@dimen/margin_low"
+        android:layout_marginBottom="@dimen/margin_low"
+        android:padding="20dp"
+        android:src="@drawable/ic_star" />
+
+    <LinearLayout
+        android:layout_width="252dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sale_point_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_low"
+            android:fontFamily="@string/typo_normal_text"
+            android:text="@string/sale_point_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/sale_point_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:text="@string/sale_point_description"
+            android:textSize="@dimen/low_size" />
+    </LinearLayout>
+
+
+</LinearLayout>

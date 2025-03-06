@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/beigeLight">
+    android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,26 +19,13 @@
             android:name="equipo5.proyectofinal.planificadordeeventos.HeaderProfile"
             tools:layout="@layout/fragment_header_profile"
             />
-
-
-
     </LinearLayout>
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_low"
-        android:text="@string/choose_supplier"
-        android:textSize="@dimen/title_size"
-        android:fontFamily="@string/typo_title"
-        android:textColor="@color/orange"
-        android:gravity="center"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="448dp"
+        android:layout_height="526dp"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginTop="50dp"
         android:layout_marginRight="@dimen/margin_normal"
@@ -47,25 +34,36 @@
         android:orientation="vertical"
         android:padding="@dimen/margin_low">
 
+        <TextView
+            android:layout_width="302dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="8dp"
+            android:text="@string/list_places"
+            android:textSize="@dimen/low_size" />
+
+        <TextView
+            android:layout_width="302dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="8dp"
+            android:text="@string/sale_point"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size" />
+
 
         <ListView
             android:id="@+id/list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="435dp"
 
             />
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_register_supplier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_background"
-        android:textColor="@color/beigeLight"
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:text="@string/btn_register"
-        android:layout_marginTop="@dimen/margin_low"
-        />
+
 </LinearLayout>
