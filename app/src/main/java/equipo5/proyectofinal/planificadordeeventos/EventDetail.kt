@@ -97,6 +97,8 @@ class TaskAdapter(private val context: Context, private val taskList: MutableLis
 
         checkBoxMain.setOnCheckedChangeListener { _, isChecked ->
             task.isChecked = isChecked
+            val intent: Intent = Intent(context, SelectSupplier::class.java)
+            context!!.startActivity(intent)
         }
 
         textMainTask.setOnClickListener {
@@ -124,6 +126,8 @@ class TaskAdapter(private val context: Context, private val taskList: MutableLis
 
             checkBoxSubTask.setOnCheckedChangeListener { _, isChecked ->
                 subTask.isChecked = isChecked
+                val intent: Intent = Intent(context, SelectSupplier::class.java)
+                context!!.startActivity(intent)
             }
 
             subTaskContainer.addView(subTaskView)
