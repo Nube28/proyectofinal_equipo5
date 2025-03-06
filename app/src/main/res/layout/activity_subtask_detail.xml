@@ -73,28 +73,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:textSize="@dimen/text_size"
+            android:fontFamily="@string/typo_normal_text"
             android:text="@string/title_subtask_description"
             android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/margin_normal"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:textSize="@dimen/text_size"
+            android:fontFamily="@string/typo_normal_text"
             android:text="@string/eg_text_lorem"
             android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
             />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_supplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_add_supplier"
+            android:background="@drawable/btn_background"
+            android:textColor="@color/beigeLight"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_low"
+            />
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add_event"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/purpleMain"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:tint="@color/beigeLight"
-        />
 </FrameLayout>

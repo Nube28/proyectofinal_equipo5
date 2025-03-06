@@ -1,5 +1,6 @@
 package equipo5.proyectofinal.planificadordeeventos
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,13 @@ class SubtaskDetail : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val btn_add_supplier = findViewById(R.id.btn_add_supplier) as androidx.appcompat.widget.AppCompatButton
+
+        btn_add_supplier.setOnClickListener{
+            val intent: Intent = Intent(this, AddSupplier::class.java)
+            startActivity(intent)
         }
     }
 }
