@@ -30,4 +30,9 @@
     <dimen name="marginStart">80dp</dimen>
     <dimen name="btnheight">49dp</dimen>
     <dimen name="btnwidht">110dp</dimen>
+    <dimen name="img_globos">120dp</dimen>
+    <dimen name="margin_fifth">55dp</dimen>
+    <dimen name="margin_three_eight">38dp</dimen>
+    <dimen name="margin_three_five">35dp</dimen>
+    <dimen name="margin_four_seven">47dp</dimen>
 </resources>
