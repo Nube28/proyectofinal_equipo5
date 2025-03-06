@@ -8,12 +8,93 @@
     android:background="@color/beigeLight"
     tools:context=".SubtaskDetail">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"
-        android:name="equipo5.proyectofinal.planificadordeeventos.HeaderProfile"
-        tools:layout="@layout/fragment_header_profile"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            android:name="equipo5.proyectofinal.planificadordeeventos.HeaderProfile"
+            tools:layout="@layout/fragment_header_profile"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/margin_low"
+                >
+
+                <TextView
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_width="@dimen/title_sign_up_width"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:text="@string/title_subtask_detail"
+                    android:textSize="@dimen/title_size"
+                    android:textColor="@color/orange"
+                    android:fontFamily="@string/typo_title"
+                    tools:ignore="RtlCompat"
+                    />
+
+                <TextView
+                    android:id="@+id/task_name_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/title_size_max"
+                    android:text="@string/eg_title_subtask"
+                    android:fontFamily="@string/typo_normal_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/img_cat_width"
+                android:layout_height="@dimen/img_cat_height"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:src="@drawable/gatoglobo"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/title_subtask_description"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/eg_text_lorem"
+            android:textColor="@color/black"
+            />
+
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/purpleMain"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:tint="@color/beigeLight"
         />
-    
 </FrameLayout>

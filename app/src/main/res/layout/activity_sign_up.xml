@@ -41,6 +41,7 @@
             android:layout_marginLeft="@dimen/margin_normal"
             android:src="@drawable/gatoglobo"
             />
+
     </LinearLayout>
 
     <TextView

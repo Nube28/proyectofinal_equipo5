@@ -64,7 +64,7 @@
     <string name="sale_point_description">Venta de globos personalizados</string>
 
     <!-- este es el de las tareas y subtareas -->
-    <string name="hint_task_description">Descripcion</string>
+    <string name="hint_task_description">Descripción</string>
     <string name="hint_task_budget">Presupuesto</string>
     <string name="title_create_subtask">CREA UNA NUEVA SUBTAREA</string>
     <string name="lb_subtask_name">Nombre de la Subtarea:</string>
@@ -83,5 +83,12 @@
     <string name="email_profile">Correo electrónico:</string>
     <string name="hint_email_profile">example@gmail.com</string>
     <string name="button_save">Guardar</string>
+
+    <!-- Momez / detalles de la subtarea gad -->
+    <string name="title_subtask_detail">Detalles de la subtarea</string>
+    <string name="eg_title_subtask">Subtarea</string>
+    <string name="title_subtask_description">Descripción:</string>
+    <string name="eg_text_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+
 
 </resources>
