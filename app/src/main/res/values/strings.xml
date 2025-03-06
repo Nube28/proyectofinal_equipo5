@@ -65,7 +65,6 @@
 
 
 
-
     <!-- este es el de las tareas y subtareas -->
     <string name="hint_task_description">Descripcion</string>
     <string name="hint_task_budget">Presupuesto</string>

@@ -23,7 +23,7 @@ class ChoseEvent : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_chose_event)
+        setContentView(R.layout.activity_choose_event)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -91,9 +91,6 @@ class EventOverviewAdapter: BaseAdapter {
 
         view.setOnClickListener {
             val intent = Intent(context, EventDetail::class.java)
-            intent.putExtra("eventName", eventOverview.event_name_overview)
-            intent.putExtra("eventBudget", eventOverview.event_budget_overview)
-            intent.putExtra("eventCategory", eventOverview.event_category_overview)
             context!!.startActivity(intent)
         }
 
