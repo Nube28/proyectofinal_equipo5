@@ -80,8 +80,8 @@ class SubtaskOverviewAdapter: BaseAdapter{
         val tv_subtask_name = view.findViewById(R.id.tv_subtask_name) as TextView
         val tv_subtask_budget = view.findViewById(R.id.tv_subtask_budget) as TextView
 
-        tv_subtask_name.setText(subtaskOverview.tv_subtask_name)
-        tv_subtask_budget.setText(subtaskOverview.tv_subtask_budget)
+        tv_subtask_name.text = subtaskOverview.tv_subtask_name
+        tv_subtask_budget.text = subtaskOverview.tv_subtask_budget.toString()
 
         view.setOnClickListener{
             val intent = Intent(context, SubtaskDetail::class.java)
