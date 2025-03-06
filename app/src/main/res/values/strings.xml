@@ -77,6 +77,7 @@
     <string name="hint_provider_name">Nombre del proveedor</string>
     <string name="lb_product_price">Precio del producto:</string>
     <string name="hint_product_price">Precio del producto</string>
+    <string name="lb_provider_example">Platos</string>
 
     <!-- Kat / Perfil -->
     <string name="tv_logoff"><u>Cerrar Sesión</u></string>

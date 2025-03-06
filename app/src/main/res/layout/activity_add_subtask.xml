@@ -52,8 +52,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@string/typo_normal_text"
             android:text="@string/lb_subtask_name"
             android:textSize="@dimen/text_size"
+            android:paddingLeft="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_low"
             android:textStyle="bold" />
 
         <EditText
@@ -61,14 +64,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_name"
-            android:background="@android:color/white"
-            android:inputType="text" />
+            android:fontFamily="@string/typo_normal_text"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:inputType="textPersonName"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lb_task_description"
+            android:fontFamily="@string/typo_normal_text"
             android:textSize="@dimen/text_size"
+            android:paddingLeft="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_low"
             android:textStyle="bold" />
 
         <EditText
@@ -76,14 +85,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_task_description"
-            android:background="@android:color/white"
-            android:inputType="textMultiLine" />
+            android:fontFamily="@string/typo_normal_text"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:inputType="text"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lb_task_budget"
+            android:fontFamily="@string/typo_normal_text"
             android:textSize="@dimen/text_size"
+            android:paddingLeft="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_low"
             android:textStyle="bold" />
 
         <EditText
@@ -91,7 +106,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_task_budget"
-            android:background="@android:color/white"
+            android:fontFamily="@string/typo_normal_text"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
             android:inputType="numberDecimal" />
     </LinearLayout>
 
