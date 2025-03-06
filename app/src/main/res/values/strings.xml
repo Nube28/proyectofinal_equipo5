@@ -69,5 +69,6 @@
     <string name="hint_provider_name">Nombre del proveedor</string>
     <string name="lb_product_price">Precio del producto:</string>
     <string name="hint_product_price">Precio del producto</string>
+    <string name="lb_provider_example">Platos</string>
 
 </resources>

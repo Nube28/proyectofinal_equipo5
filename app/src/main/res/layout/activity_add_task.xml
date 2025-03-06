@@ -59,7 +59,10 @@
             android:textSize="@dimen/text_size"
             android:paddingLeft="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_low"
+            android:textStyle="bold"
             />
+
+
 
         <EditText
             android:id="@+id/et_task_name"
@@ -73,28 +76,48 @@
 
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@string/typo_normal_text"
+            android:hint="@string/hint_task_description"
+            android:textSize="@dimen/text_size"
+            android:paddingLeft="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_low"
+            android:textStyle="bold"
+            />
+
         <EditText
             android:id="@+id/et_task_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@string/typo_normal_text"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
             android:hint="@string/hint_task_description"
-            android:background="@android:color/white"
-            android:inputType="textMultiLine" />
+            android:inputType="text" />
 
         <TextView
+            android:hint="@string/hint_task_budget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lb_task_budget"
+            android:fontFamily="@string/typo_normal_text"
             android:textSize="@dimen/text_size"
+            android:paddingLeft="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_low"
             android:textStyle="bold" />
+
 
         <EditText
             android:id="@+id/et_task_budget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@string/typo_normal_text"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
             android:hint="@string/hint_task_budget"
-            android:background="@android:color/white"
             android:inputType="numberDecimal" />
+
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
