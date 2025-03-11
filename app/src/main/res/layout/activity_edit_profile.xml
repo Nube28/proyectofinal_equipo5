@@ -80,19 +80,20 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_marginEnd="@dimen/marginEnd"/>
+                android:layout_marginEnd="@dimen/marginEt"/>
 
             <EditText
                 android:id="@+id/et_new_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/et_widht"
+                android:layout_height="@dimen/et_height"
                 android:layout_marginStart="@dimen/marginStart"
                 android:layout_marginEnd="@dimen/marginEnd"
                 android:fontFamily="@string/typo_normal_text"
                 android:hint="@string/hint_name_profile"
                 android:padding="@dimen/margin_low"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size"
+                android:background="@drawable/btn_border"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -104,19 +105,20 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_marginEnd="@dimen/margin_fifth"/>
+                android:layout_marginEnd="@dimen/img_ballons"/>
 
             <EditText
                 android:id="@+id/et_new_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/et_widht"
+                android:layout_height="@dimen/et_height"
                 android:layout_marginStart="@dimen/marginStart"
                 android:layout_marginEnd="@dimen/marginEnd"
                 android:fontFamily="@string/typo_normal_text"
                 android:hint="@string/hint_email_profile"
                 android:padding="@dimen/margin_low"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size"/>
+                android:textSize="@dimen/text_size"
+                android:background="@drawable/btn_border"/>
 
             <!-- Boton -->
             <androidx.appcompat.widget.AppCompatButton

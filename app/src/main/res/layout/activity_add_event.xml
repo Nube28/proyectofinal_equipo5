@@ -71,13 +71,14 @@
         <EditText
             android:id="@+id/et_name_event"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/four_five"
             android:fontFamily="@string/typo_normal_text"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size"
-            android:hint="@string/hint_create_event" />
+            android:hint="@string/hint_create_event"
+            android:background="@drawable/btn_border"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -93,14 +94,15 @@
         <EditText
             android:id="@+id/et_estimated_budget"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/four_five"
             android:fontFamily="@string/typo_normal_text"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size"
             android:hint="@string/hint_estimated_budget"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:background="@drawable/btn_border"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -117,13 +119,14 @@
         <EditText
             android:id="@+id/et_event_description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@string/typo_normal_text"
+            android:layout_height="@dimen/four_five"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
+            android:background="@drawable/btn_border"
+            android:fontFamily="@string/typo_normal_text"
+            android:hint="@string/hint_event_description"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
-            android:hint="@string/hint_event_description" />
+            android:textSize="@dimen/text_size" />
 
         <TextView
             android:layout_width="match_parent"
@@ -146,7 +149,8 @@
             android:fontFamily="@string/typo_normal_text"
             android:textColor="@color/black"
             android:layout_marginLeft="@dimen/margin_normal"
-            android:layout_marginRight="@dimen/margin_normal" />
+            android:layout_marginRight="@dimen/margin_normal"
+            android:background="@drawable/btn_border"/>
 
     </LinearLayout>
 
