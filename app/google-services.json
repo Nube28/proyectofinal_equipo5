@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "891993965065",
+    "project_id": "planificadordeeventos-cb385",
+    "storage_bucket": "planificadordeeventos-cb385.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891993965065:android:e419a22682682c0180aed8",
+        "android_client_info": {
+          "package_name": "equipo5.proyectofinal.planificadordeeventos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwSJp5M1SkF7-GdMfW_TlhiyT3Kr8JddA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

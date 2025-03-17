@@ -65,6 +65,7 @@
     <string name="sale_point">Punto de venta</string>
     <string name="sale_point_name">Globitos Maria</string>
     <string name="sale_point_description">Venta de globos personalizados</string>
+    <string name="msg_password_dont_match">Las contraseñas no coinciden</string>
 
     <!-- este es el de las tareas y subtareas -->
     <string name="hint_task_description">Descripción</string>

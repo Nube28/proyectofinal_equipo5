@@ -63,7 +63,6 @@
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_name"
         android:inputType="textPersonName"
-
         />
 
     <TextView
@@ -84,7 +83,7 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_email"
-        android:inputType="textPassword"
+        android:inputType="textEmailAddress"
         />
     <TextView
         android:layout_width="match_parent"
@@ -104,7 +103,7 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_password"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
 
         />
 
