@@ -37,6 +37,7 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:fontFamily="@string/typo_normal_text"
         android:text="@string/lb_email"
@@ -54,10 +55,11 @@
         android:fontFamily="@string/typo_normal_text"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
-
+        android:background="@drawable/btn_border"
         />
 
     <TextView
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@string/typo_normal_text"
@@ -70,12 +72,13 @@
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:fontFamily="@string/typo_normal_text"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
+        android:background="@drawable/btn_border"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -91,6 +94,7 @@
         />
 
     <TextView
+        android:layout_marginTop="4dp"
         android:id="@+id/btn_not_account_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

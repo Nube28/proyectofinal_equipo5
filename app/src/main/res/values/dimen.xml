@@ -42,4 +42,7 @@
     <dimen name="et_widht">287dp</dimen>
     <dimen name="seventeen">70dp</dimen>
     <dimen name="four_five">45dp</dimen>
+    <!-- Nuevas Dimen -->
+    <dimen name="dot">0.8dp</dimen>
+    <dimen name="eight">8dp</dimen>
 </resources>

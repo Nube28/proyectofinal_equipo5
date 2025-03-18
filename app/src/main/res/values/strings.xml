@@ -4,7 +4,7 @@
         Ctrl+R para buscar el texto si te da flojera
      -->
     <string name="app_name">PlanificadorDeEventos</string>
-    <string name="title_main">¡BIENVENIDO A TU PLANIFICADOR DE EVENTOS!</string>
+    <string name="title_main">¡BIENVENIDO A TU\n PLANIFICADOR DE EVENTOS!</string>
     <string name="lb_email">Correo:</string>
     <string name="hint_email">Correo@ejemplo.com</string>
     <string name="lb_name">Nombre:</string>
@@ -16,7 +16,7 @@
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_register">Registrar</string>
     <string name="btn_sign_in">Iniciar sesión</string>
-    <string name="btn_no_account_register">¿Aún no tienes una cuenta? ¡Regístrate aquí!</string>
+    <string name="btn_no_account_register"><u>¿Aún no tienes una cuenta? ¡Regístrate aquí!</u></string>
     <string name="title_signup">¡REGÍSTRATE CON NOSOTROS! :D</string>
     <string name="title_create_event">CREA TU \n EVENTO :3</string>
     <string name="hint_create_event">Evento Solsticio</string>
@@ -39,7 +39,7 @@
     <string name="btn_event_overview">Resumen del evento</string>
     <string name="btn_price_comparation">Comparación de precios</string>
     <string name="title_subtask">Subtareas de:</string>
-    <string name="title_create_task">CREA UNA NUEVA TAREA</string>
+    <string name="title_create_task">CREA UNA NUEVA\n TAREA</string>
     <string name="lb_task_name">Nombre de la tarea:</string>
     <string name="lb_task_description">Descripción de la tarea:</string>
     <string name="lb_task_budget">Presupuesto (estimado) de la tarea:</string>
@@ -52,7 +52,7 @@
     <string name="lb_real_budget">Presupuesto real</string>
     <string name="title_cost_comparative">Comparativa de costos</string>
     <string name="btn_place_list">Listado de lugares</string>
-    <string name="btn_event_estadistic">Ver estadisticas del evento</string>
+    <string name="btn_event_estadistic"><u>Ver estadisticas del evento</u></string>
     <string name="eg_event_name">Fiesta de Bell</string>
     <string name="eg_event_budget">100000</string>
     <string name="eg_event_category">Fiesta</string>
@@ -70,11 +70,11 @@
     <!-- este es el de las tareas y subtareas -->
     <string name="hint_task_description">Descripción</string>
     <string name="hint_task_budget">Presupuesto</string>
-    <string name="title_create_subtask">CREA UNA NUEVA SUBTAREA</string>
+    <string name="title_create_subtask">CREA UNA NUEVA\n SUBTAREA</string>
     <string name="lb_subtask_name">Nombre de la Subtarea:</string>
     <string name="et_subtask_name">Subtarea</string>
     <string name="btn_register_subtask">Registrar</string>
-    <string name="title_create_provider">AGREGA UN NUEVO PROVEEDOR</string>
+    <string name="title_create_provider">AGREGA UN NUEVO\n PROVEEDOR PARA</string>
     <string name="lb_provider_name">Nombre del proveedor:</string>
     <string name="hint_provider_name">Nombre del proveedor</string>
     <string name="lb_product_price">Precio del producto:</string>
@@ -98,7 +98,8 @@
     <string name="eg_title_subtask">Subtarea</string>
     <string name="title_subtask_description">Descripción:</string>
     <string name="eg_text_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
-    <string name="btn_add_supplier">Agregar provedor</string>
+    <string name="btn_add_supplier">Agregar proveedor</string>
+    <!-- Proveedor, corrige eso-->
 
 
 </resources>

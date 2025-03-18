@@ -30,12 +30,14 @@
             android:text="@string/title_create_provider"
             android:textSize="@dimen/title_size"
             android:textColor="@color/orange"
+            android:paddingStart="35dp"
+
             android:fontFamily="@string/typo_title"
             android:textStyle="bold"
             android:padding="@dimen/margin_low" />
 
         <ImageView
-            android:layout_width="80dp"
+            android:layout_width="150dp"
             android:layout_height="80dp"
             android:layout_marginStart="@dimen/margin_low"
             android:layout_gravity="center_vertical"
@@ -45,13 +47,14 @@
     <!-- Espacio vacío donde se traerá
     el nombre del proveedor
     -->
+
     <TextView
         android:id="@+id/et_provider_name_space"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/lb_provider_example"
         android:textSize="@dimen/title_size_max"
-        android:textColor="@color/orangeLight"
+        android:textColor="@color/black"
         android:gravity="center"
         android:layout_marginTop="@dimen/margin_normal" />
 
@@ -70,16 +73,18 @@
             android:textSize="@dimen/text_size"
             android:paddingLeft="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_low"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/et_provider_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:hint="@string/hint_provider_name"
             android:fontFamily="@string/typo_normal_text"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
+            android:background="@drawable/btn_border"
             android:inputType="textPersonName"
          />
 
@@ -91,17 +96,19 @@
             android:fontFamily="@string/typo_normal_text"
             android:paddingLeft="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_low"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/et_product_price"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:hint="@string/hint_product_price"
             android:fontFamily="@string/typo_normal_text"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:background="@drawable/btn_border"/>
     </LinearLayout>
 
 

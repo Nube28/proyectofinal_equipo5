@@ -47,6 +47,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:fontFamily="@string/typo_normal_text"
         android:text="@string/lb_name"
         android:textSize="@dimen/text_size"
@@ -57,17 +58,19 @@
     <EditText
         android:id="@+id/et_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:fontFamily="@string/typo_normal_text"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_name"
         android:inputType="textPersonName"
+        android:background="@drawable/btn_border"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:fontFamily="@string/typo_normal_text"
         android:text="@string/lb_email"
         android:textSize="@dimen/text_size"
@@ -78,16 +81,18 @@
     <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:fontFamily="@string/typo_normal_text"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
+        android:background="@drawable/btn_border"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:fontFamily="@string/typo_normal_text"
         android:text="@string/lb_password"
         android:textSize="@dimen/text_size"
@@ -98,18 +103,19 @@
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:fontFamily="@string/typo_normal_text"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
-
+        android:background="@drawable/btn_border"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:fontFamily="@string/typo_normal_text"
         android:text="@string/lb_repeat_password"
         android:textSize="@dimen/text_size"
@@ -120,12 +126,13 @@
     <EditText
         android:id="@+id/et_repeat_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:fontFamily="@string/typo_normal_text"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:hint="@string/hint_repeat_password"
         android:inputType="textPassword"
+        android:background="@drawable/btn_border"
         />
 
     <androidx.appcompat.widget.AppCompatButton

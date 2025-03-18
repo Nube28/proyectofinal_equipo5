@@ -28,6 +28,7 @@
 
 
     <TextView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_low"
@@ -42,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="448dp"
         android:layout_marginLeft="@dimen/margin_normal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginBottom="50dp"
         android:background="@drawable/postit_background"
@@ -54,7 +55,6 @@
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             />
 
     </LinearLayout>

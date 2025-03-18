@@ -28,6 +28,7 @@
             android:id="@+id/task_name_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="@dimen/title_size_max"
             android:text="@string/eg_task"
             android:fontFamily="@string/typo_normal_text"
