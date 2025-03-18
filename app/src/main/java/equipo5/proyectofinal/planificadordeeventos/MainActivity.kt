@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser != null){
+            Toast.makeText(this, "Ya tienes una sesion iniciada", Toast.LENGTH_SHORT).show()
             goToMain(currentUser)
         }
     }
