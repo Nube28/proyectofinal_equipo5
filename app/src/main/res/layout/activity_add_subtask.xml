@@ -130,5 +130,6 @@
         android:textColor="@color/beigeLight"
         android:padding="10dp"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_low" />
+        android:layout_marginTop="@dimen/margin_low"
+        />
 </LinearLayout>
