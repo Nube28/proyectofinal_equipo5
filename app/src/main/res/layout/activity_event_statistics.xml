@@ -43,13 +43,83 @@
         android:textColor="@color/orange"
         android:textSize="@dimen/title_size" />
 
-    <ImageView
-        android:layout_width="438dp"
-        android:layout_height="205dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/margin_low"
-        android:src="@drawable/barras"
-         />
+    <GridLayout
+        android:background="@color/fondo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/bargraphs"
+        android:columnCount="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Local"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size"
+            android:layout_marginRight="15dp"/>
+
+        <View android:layout_height="20dp"
+            android:layout_width="250dp"
+            android:id="@+id/Local"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Mesas"
+            android:textSize="@dimen/medium_text_size"
+            android:textColor="@color/black"
+            android:layout_marginRight="15dp"/>
+
+        <View android:layout_height="20dp"
+            android:layout_width="250dp"
+            android:id="@+id/Mesas"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Comida"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size"
+            android:layout_marginRight="15dp"/>
+
+        <View android:layout_height="20dp"
+            android:layout_width="250dp"
+            android:id="@+id/Comida"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Musica"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size"
+            android:layout_marginRight="15dp"/>
+
+        <View android:layout_height="20dp"
+            android:layout_width="250dp"
+            android:id="@+id/Musica"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size"
+            android:layout_marginRight="15dp"/>
+
+        <View android:layout_height="20dp"
+            android:layout_width="250dp"
+            android:id="@+id/Total"/>
+
+    </GridLayout>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -60,13 +130,30 @@
         android:textColor="@color/orange"
         android:textSize="@dimen/title_size" />
 
-    <ImageView
-        android:layout_width="438dp"
-        android:layout_height="190dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/margin_normal"
-        android:src="@drawable/pastel"
-         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fondo"
+        android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="left"
+        android:id="@+id/graph">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="137dp"
+            android:layout_height="209dp"
+            android:src="@drawable/things"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="@dimen/medium_text_size"
+            android:layout_marginBottom="@dimen/medium_text_size">
+
+        </ImageView>
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sale_point"
@@ -78,5 +165,6 @@
         android:padding="10dp"
         android:text="@string/btn_place_list"
         android:textColor="@color/beigeLight" />
+
 
 </LinearLayout>

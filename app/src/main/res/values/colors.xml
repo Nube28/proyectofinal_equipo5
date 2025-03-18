@@ -12,4 +12,9 @@
     <color name="yellowDarker">#F3EAA9</color>
     <color name="darkerGray">#000</color>
     <color name="gris">#C7C5C5</color>
+    <color name="fondo">#FFEBC7</color>
+    <color name="blue_graphic">#2A79F0</color>
+    <color name="orange_graphic">#F89E14</color>
+
 </resources>
+
