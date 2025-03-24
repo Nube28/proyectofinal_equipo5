@@ -1,110 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beigeLight"
+    android:orientation="vertical"
     tools:context=".SubtaskDetail">
 
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:layout_height="@dimen/header_height"
+        android:name="equipo5.proyectofinal.planificadordeeventos.HeaderProfile"
+        tools:layout="@layout/fragment_header_profile" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container_view"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/header_height"
-            android:name="equipo5.proyectofinal.planificadordeeventos.HeaderProfile"
-            tools:layout="@layout/fragment_header_profile"
-            />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/margin_low"
-                >
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_gravity="center">
 
-                <TextView
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:layout_width="@dimen/title_sign_up_width"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textAlignment="center"
-                    android:text="@string/title_subtask_detail"
-                    android:textSize="@dimen/title_size"
-                    android:textColor="@color/orange"
-                    android:fontFamily="@string/typo_title"
-                    tools:ignore="RtlCompat"
-                    />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/task_name_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/title_size_max"
-                    android:text="@string/eg_title_subtask"
-                    android:fontFamily="@string/typo_normal_text"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_subtask_detail"
+                        android:textSize="@dimen/title_size"
+                        android:textColor="@color/orange"
+                        android:fontFamily="@string/typo_title" />
 
+                    <TextView
+                        android:id="@+id/task_name_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/title_size_max"
+                        android:text="@string/eg_title_subtask"
+                        android:fontFamily="@string/typo_normal_text"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="@dimen/img_cat_width"
+                    android:layout_height="@dimen/img_cat_height"
+                    android:src="@drawable/gatoglobo"
+                    android:layout_marginLeft="16dp" />
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="@dimen/img_cat_width"
-                android:layout_height="@dimen/img_cat_height"
-                android:layout_marginLeft="@dimen/margin_normal"
-                android:src="@drawable/gatoglobo"
-                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_subtask_description"
+                android:textSize="@dimen/text_size"
+                android:fontFamily="@string/typo_normal_text"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eg_text_lorem"
+                android:textSize="@dimen/text_size"
+                android:fontFamily="@string/typo_normal_text"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_price_comparation"
+                android:textSize="@dimen/text_size"
+                android:fontFamily="@string/typo_normal_text"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp" />
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/postit_background"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lb_comparative_example"
+                    android:textColor="@color/black"
+                    android:textAlignment="textStart"
+                    android:fontFamily="@string/typo_normal_text"
+                    android:textSize="@dimen/text_size" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dot"
+                    android:background="@color/black"
+                    android:layout_marginTop="@dimen/margin_low"
+                    android:layout_marginBottom="@dimen/eight"/>
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@string/typo_normal_text"
+                            android:text="Don Carlos"
+                            android:textColor="@color/black"
+                            android:padding="4dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@string/typo_normal_text"
+                            android:text="1000"
+                            android:textColor="@color/black"
+                            android:padding="4dp" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Doña Ana"
+                            android:textColor="@color/black"
+                            android:fontFamily="@string/typo_normal_text"
+                            android:padding="4dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@string/typo_normal_text"
+                            android:text="102"
+                            android:textColor="@color/black"
+                            android:padding="4dp" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sillas Express"
+                            android:textColor="@color/black"
+                            android:fontFamily="@string/typo_normal_text"
+                            android:padding="4dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@string/typo_normal_text"
+                            android:text="1800"
+                            android:textColor="@color/black"
+                            android:padding="4dp" />
+                    </TableRow>
+
+                </TableLayout>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_supplier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_add_supplier"
+                android:background="@drawable/btn_background"
+                android:textColor="@color/beigeLight"
+                android:padding="10dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/text_size"
-            android:fontFamily="@string/typo_normal_text"
-            android:text="@string/title_subtask_description"
-            android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/margin_normal"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/text_size"
-            android:fontFamily="@string/typo_normal_text"
-            android:text="@string/eg_text_lorem"
-            android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/margin_normal"
-            android:layout_marginRight="@dimen/margin_normal"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-
-            android:id="@+id/btn_add_supplier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_add_supplier"
-            android:background="@drawable/btn_background"
-            android:textColor="@color/beigeLight"
-            android:padding="10dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_low"
-            android:buttonTint="@color/purpleMain"
-            />
-
-    </LinearLayout>
-
-</FrameLayout>
+    </ScrollView>
+</LinearLayout>

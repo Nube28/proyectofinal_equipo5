@@ -37,11 +37,12 @@
     <string name="btn_task">Tareas</string>
     <string name="btn_subtask">Subtareas</string>
     <string name="btn_event_overview">Resumen del evento</string>
-    <string name="btn_price_comparation">Comparación de precios</string>
+    <string name="btn_price_comparation">Comparación de precios:</string>
     <string name="title_subtask">Subtareas de:</string>
     <string name="title_create_task">CREA UNA NUEVA\n TAREA</string>
     <string name="lb_task_name">Nombre de la tarea:</string>
     <string name="lb_task_description">Descripción de la tarea:</string>
+    <string name="lb_subtask_description">Descripción de la subtarea:</string>
     <string name="lb_task_budget">Presupuesto (estimado) de la tarea:</string>
     <string name="title_price_comparation">COMPARACIÓN DE PRECIOS</string>
     <string name="lb_item_name">Nombre del artículo:</string>
@@ -70,6 +71,7 @@
     <!-- este es el de las tareas y subtareas -->
     <string name="hint_task_description">Descripción</string>
     <string name="hint_task_budget">Presupuesto</string>
+    <string name="lb_newtask_budget">Presupuesto:</string>
     <string name="title_create_subtask">CREA UNA NUEVA\n SUBTAREA</string>
     <string name="lb_subtask_name">Nombre de la Subtarea:</string>
     <string name="et_subtask_name">Subtarea</string>
@@ -80,6 +82,7 @@
     <string name="lb_product_price">Precio del producto:</string>
     <string name="hint_product_price">Precio del producto</string>
     <string name="lb_provider_example">Platos</string>
+    <string name="lb_comparative_example">Platos:</string>
 
     <!-- Kat / Perfil -->
     <string name="name_profile">Nombre:</string>
@@ -100,6 +103,13 @@
     <string name="eg_text_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="btn_add_supplier">Agregar proveedor</string>
     <!-- Proveedor, corrige eso-->
+
+    <!-- Manuel / Estadisticas -->
+    <string name="local">Local</string>
+    <string name="mesas">Mesas</string>
+    <string name="comida">Comida</string>
+    <string name="musica">Musica</string>
+    <string name="total">Total</string>
 
 
 </resources>

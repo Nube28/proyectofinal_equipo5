@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="@string/lb_task_description"
+            android:text="@string/lb_subtask_description"
             android:fontFamily="@string/typo_normal_text"
             android:textSize="@dimen/text_size"
             android:paddingLeft="@dimen/margin_normal"

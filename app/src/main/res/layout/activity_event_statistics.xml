@@ -28,9 +28,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@string/typo_title"
         android:gravity="center"
-        android:text="@string/title_event_overview"
+        android:text="@string/event_title"
+        android:layout_marginBottom="4dp"
         android:textColor="@color/orange"
         android:textSize="@dimen/title_size"/>
 
@@ -47,15 +49,18 @@
         android:background="@color/fondo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:id="@+id/bargraphs"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:columnCount="2">
 
         <TextView
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="Local"
+            android:text="@string/local"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size"
             android:layout_marginRight="15dp"/>
@@ -69,7 +74,8 @@
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="Mesas"
+            android:text="@string/mesas"
+            android:textStyle="bold"
             android:textSize="@dimen/medium_text_size"
             android:textColor="@color/black"
             android:layout_marginRight="15dp"/>
@@ -83,7 +89,8 @@
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="Comida"
+            android:text="@string/comida"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size"
             android:layout_marginRight="15dp"/>
@@ -96,7 +103,8 @@
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="Musica"
+            android:text="@string/musica"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size"
             android:layout_marginRight="15dp"/>
@@ -109,7 +117,8 @@
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="Total"
+            android:text="@string/total"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size"
             android:layout_marginRight="15dp"/>
@@ -120,7 +129,6 @@
 
     </GridLayout>
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -128,12 +136,16 @@
         android:gravity="center"
         android:text="@string/global_comparative"
         android:textColor="@color/orange"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:textSize="@dimen/title_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/fondo"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -165,6 +177,4 @@
         android:padding="10dp"
         android:text="@string/btn_place_list"
         android:textColor="@color/beigeLight" />
-
-
 </LinearLayout>

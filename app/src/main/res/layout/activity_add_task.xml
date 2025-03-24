@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@string/typo_normal_text"
-            android:hint="@string/hint_task_description"
+            android:hint="@string/title_subtask_description"
             android:textSize="@dimen/text_size"
             android:paddingLeft="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_low"
@@ -103,7 +103,7 @@
             android:background="@drawable/btn_border"/>
 
         <TextView
-            android:hint="@string/hint_task_budget"
+            android:hint="@string/lb_newtask_budget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@string/typo_normal_text"
