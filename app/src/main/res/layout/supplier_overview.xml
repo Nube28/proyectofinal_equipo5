@@ -15,7 +15,9 @@
         <CheckBox
             android:id="@+id/check_supplier"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:buttonTint="@drawable/checkbox_selector"/>
+
 
         <TextView
             android:id="@+id/text_name_supplier"

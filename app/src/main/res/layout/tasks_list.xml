@@ -14,7 +14,9 @@
         <CheckBox
             android:id="@+id/check_main_task"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:buttonTint="@drawable/checkbox_selector"/>
+
 
         <TextView
             android:id="@+id/text_main_task"
