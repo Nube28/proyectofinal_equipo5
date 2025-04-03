@@ -33,7 +33,7 @@ class AddTask : AppCompatActivity() {
         val etTaskName = findViewById<EditText>(R.id.et_task_name)
         val etTaskDescription = findViewById<EditText>(R.id.et_task_description)
         val etTaskBudget = findViewById<EditText>(R.id.et_task_budget)
-        val btnRegisterTask = findViewById<Button>(R.id.btn_register_task)
+        val btnRegisterTask = findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btn_add_task)
 
         // Evento del botón
         btnRegisterTask.setOnClickListener {
