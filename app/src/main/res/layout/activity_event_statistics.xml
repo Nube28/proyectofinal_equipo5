@@ -60,12 +60,23 @@
             android:textSize="@dimen/medium_text_size"
             android:layout_marginRight="15dp"/>
 
-        <View android:layout_height="20dp"
-            android:layout_width="250dp"
-            android:id="@+id/Local"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/Local"/>
+
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/LocalR"/>
+
+        </LinearLayout>
 
         <TextView
-
+            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
@@ -74,25 +85,50 @@
             android:textColor="@color/black"
             android:layout_marginRight="15dp"/>
 
-        <View android:layout_height="20dp"
-            android:layout_width="250dp"
-            android:id="@+id/Mesas"/>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/Mesas"/>
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/MesasR"/>
+        </LinearLayout>
+
 
         <TextView
-
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
             android:text="Comida"
+            android:layout_marginTop="15dp"
             android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size"
             android:layout_marginRight="15dp"/>
 
-        <View android:layout_height="20dp"
-            android:layout_width="250dp"
-            android:id="@+id/Comida"/>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/Comida"/>
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/ComidaR"/>
+        </LinearLayout>
+
+
 
         <TextView
+            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
@@ -101,11 +137,23 @@
             android:textSize="@dimen/medium_text_size"
             android:layout_marginRight="15dp"/>
 
-        <View android:layout_height="20dp"
-            android:layout_width="250dp"
-            android:id="@+id/Musica"/>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/Musica"/>
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/MusicaR"/>
+
+        </LinearLayout>
 
         <TextView
+            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="wrap_content"
@@ -114,9 +162,20 @@
             android:textSize="@dimen/medium_text_size"
             android:layout_marginRight="15dp"/>
 
-        <View android:layout_height="20dp"
-            android:layout_width="250dp"
-            android:id="@+id/Total"/>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/Total"/>
+            <View android:layout_height="20dp"
+                android:layout_width="250dp"
+                android:id="@+id/TotalR"/>
+
+        </LinearLayout>
 
     </GridLayout>
 
