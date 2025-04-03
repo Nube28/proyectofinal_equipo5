@@ -131,10 +131,10 @@
         android:id="@+id/btn_add_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_register"
-        android:background="@drawable/btn_background"
-        android:textColor="@color/beigeLight"
-        android:padding="10dp"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_low" />
+        android:layout_marginTop="@dimen/margin_low"
+        android:background="@drawable/btn_background"
+        android:padding="10dp"
+        android:text="@string/btn_register"
+        android:textColor="@color/beigeLight" />
 </LinearLayout>
