@@ -31,10 +31,15 @@ class EventStatistics : AppCompatActivity() {
 
 
         val localBar = findViewById<View>(R.id.Local)
+        val localRBar = findViewById<View>(R.id.LocalR)
         val mesasBar = findViewById<View>(R.id.Mesas)
+        val mesasRBar = findViewById<View>(R.id.MesasR)
         val comidaBar = findViewById<View>(R.id.Comida)
+        val comidaRBar = findViewById<View>(R.id.ComidaR)
         val musicaBar = findViewById<View>(R.id.Musica)
+        val musicaRBar = findViewById<View>(R.id.MusicaR)
         val totalBar = findViewById<View>(R.id.Total)
+        val totalRBar = findViewById<View>(R.id.TotalR)
         val graph = findViewById<ConstraintLayout>(R.id.graph)
 
 
@@ -59,11 +64,19 @@ class EventStatistics : AppCompatActivity() {
             bar.setBackgroundColor(color)
         }
 
-        setBarWidth(localBar, 80, Blue)
-        setBarWidth(mesasBar, 60, Blue)
-        setBarWidth(comidaBar, 90, Blue)
-        setBarWidth(musicaBar, 50, Blue)
-        setBarWidth(totalBar, 100, Blue)
+        setBarWidth(localBar, 80, Orange)
+        setBarWidth(mesasBar, 60, Orange)
+        setBarWidth(comidaBar, 90, Orange)
+        setBarWidth(musicaBar, 50, Orange)
+        setBarWidth(totalBar, 100, Orange)
+
+
+
+        setBarWidth(localRBar, 60, Blue)
+        setBarWidth(mesasRBar, 70, Blue)
+        setBarWidth(comidaRBar, 100, Blue)
+        setBarWidth(musicaRBar, 60, Blue)
+        setBarWidth(totalRBar, 120, Blue)
 
         val btn_sale_point = findViewById(R.id.btn_sale_point) as Button
         btn_sale_point.setOnClickListener{
