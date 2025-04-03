@@ -14,11 +14,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ChoseEvent : AppCompatActivity() {
 
     var adapter: EventOverviewAdapter? = null
     var eventsOverview = ArrayList<EventOverview>()
+    val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +47,31 @@ class ChoseEvent : AppCompatActivity() {
 
     }
 
-    fun cargarEventos(){
-        eventsOverview.add(EventOverview(R.drawable.lain, "Fiesta de bell", "10000", "Fiesta"))
-        eventsOverview.add(EventOverview(R.drawable.lain, "Boda de bell", "100000", "Boda"))
-        eventsOverview.add(EventOverview(R.drawable.lain, "Boda de gomez", "1000", "Boda"))
+    fun cargarEventos() {
+        db.collection("Eventos")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val nombre = document.getString("nombre") ?: "Sin nombre"
+                    val presupuesto = document.get("presupuesto")?.toString() ?: "0"
+                    val tipo = document.getString("tipo") ?: "Sin tipo"
+
+                    eventsOverview.add(
+                        EventOverview(
+                            R.drawable.lain, // Imagen predeterminada
+                            nombre,
+                            presupuesto,
+                            tipo
+                        )
+                    )
+                }
+                adapter?.notifyDataSetChanged() // Actualiza la lista en pantalla
+            }
+            .addOnFailureListener { e ->
+                e.printStackTrace() // Muestra el error en la consola
+            }
     }
+
 }
 
 class EventOverviewAdapter: BaseAdapter {
