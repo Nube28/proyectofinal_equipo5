@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddEventActivity : AppCompatActivity() {
@@ -35,11 +36,14 @@ class AddEventActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+
             val evento = hashMapOf(
                 "nombre" to nombre,
                 "presupuesto" to presupuesto,
                 "descripcion" to descripcion,
-                "tipo" to tipo
+                "tipo" to tipo,
+                "usuarioId" to userId
             )
 
             db.collection("Eventos")

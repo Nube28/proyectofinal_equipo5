@@ -14,6 +14,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ChoseEvent : AppCompatActivity() {
@@ -48,7 +49,10 @@ class ChoseEvent : AppCompatActivity() {
     }
 
     fun cargarEventos() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
         db.collection("Eventos")
+            .whereEqualTo("usuarioId", userId)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
@@ -58,7 +62,7 @@ class ChoseEvent : AppCompatActivity() {
 
                     eventsOverview.add(
                         EventOverview(
-                            R.drawable.lain, // Imagen predeterminada
+                            R.drawable.lain,
                             nombre,
                             presupuesto,
                             tipo
