@@ -38,133 +38,181 @@ class EventDetail : AppCompatActivity() {
         val tasks = mutableListOf<TaskItem>()
 
         if (eventId != null) {
-            db.collection("Eventos").document(eventId).get()
+            // Cargar los datos del evento
+            db.collection("Eventos").document(eventId)
+                .get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
+                        // Obtener datos del evento
                         val nombreEvento = document.getString("nombre") ?: "Sin nombre"
-                        val presupuesto = document.get("presupuesto")?.toString() ?: "0"
+                        val presupuestoEvento = document.get("presupuesto")?.toString() ?: "0"
 
+                        // Actualizar el nombre y presupuesto en la interfaz
                         txtEventName.text = nombreEvento
-                        txtEventBudget.text = presupuesto
+                        txtEventBudget.text = presupuestoEvento
 
-                        val tareaList = document.get("Tarea") as? List<Map<*, *>>
+                        // Obtener las tareas del evento
+                        db.collection("Eventos").document(eventId).collection("Tareas")
+                            .get()
+                            .addOnSuccessListener { tareaDocuments ->
+                                val tempTasks = mutableListOf<TaskItem>()
+                                val tareasTotales = tareaDocuments.size()
+                                var tareasCargadas = 0
 
-                        if (tareaList != null) {
-                            for (tarea in tareaList) {
-                                val nombreTarea = tarea["nombre"] as? String ?: ""
-                                val presupuestoTarea = tarea["presupuesto"]?.toString() ?: "0"
-                                val subtareasRaw = tarea["Subtarea"] as? List<Map<*, *>> ?: listOf()
+                                // Recorrer las tareas y cargar las subtareas
+                                for (tareaDoc in tareaDocuments) {
+                                    val tareaId = tareaDoc.id
+                                    val nombreTarea = tareaDoc.getString("nombre") ?: ""
+                                    val presupuestoTarea =
+                                        tareaDoc.get("presupuesto")?.toString() ?: "0"
+                                    val terminadoTarea = tareaDoc.getBoolean("terminado") ?: false
 
-                                val subTasks = subtareasRaw.map {
-                                    SubTaskItem(
-                                        name = it["nombre"] as? String ?: "",
-                                        cost = it["presupuesto"]?.toString() ?: "0"
-                                    )
+                                    // Cargar las subtareas para esta tarea
+                                    db.collection("Eventos").document(eventId)
+                                        .collection("Tareas").document(tareaId)
+                                        .collection("Subtareas")
+                                        .get()
+                                        .addOnSuccessListener { subtareaDocs ->
+                                            val subtareas = subtareaDocs.map { subDoc ->
+                                                SubTaskItem(
+                                                    id = subDoc.id,
+                                                    name = subDoc.getString("nombre") ?: "",
+                                                    cost = subDoc.get("presupuesto")?.toString()
+                                                        ?: "0",
+                                                    isChecked = subDoc.getBoolean("terminado")
+                                                        ?: false,
+                                                    taskId = tareaId
+                                                )
+                                            }
+
+                                            // Añadir tarea con subtareas
+                                            tempTasks.add(
+                                                TaskItem(
+                                                    id = tareaId,
+                                                    name = nombreTarea,
+                                                    cost = presupuestoTarea,
+                                                    isChecked = terminadoTarea,
+                                                    subTasks = subtareas
+                                                )
+                                            )
+
+                                            tareasCargadas++
+                                            if (tareasCargadas == tareasTotales) {
+                                                // Configurar el adaptador una vez que todas las tareas estén cargadas
+                                                val adapter = TaskAdapter(this, tempTasks, eventId)
+                                                listView.adapter = adapter
+                                            }
+                                        }
                                 }
-
-                                tasks.add(TaskItem(nombreTarea, presupuestoTarea, subTasks = subTasks))
                             }
-                        }
-
-                        val adapter = TaskAdapter(this, tasks)
-                        listView.adapter = adapter
                     }
                 }
-        }
 
-        val btn_event_estadistic: TextView = findViewById(R.id.btn_event_estadistic)
-        btn_event_estadistic.setOnClickListener {
-            val intent: Intent = Intent(this, EventStatistics::class.java)
-            startActivity(intent)
-        }
-
-        val adapter = TaskAdapter(this, tasks)
-        listView.adapter = adapter
-
-        val btn_add_event = findViewById(R.id.btn_add_event) as com.google.android.material.floatingactionbutton.FloatingActionButton
-
-        btn_add_event.setOnClickListener{
-            val intent: Intent = Intent(this, AddTask::class.java)
-            startActivity(intent)
-        }
-
-    }
-}
-
-data class TaskItem(
-    val name: String,
-    val cost: String,
-    var isChecked: Boolean = false,
-    var isExpanded: Boolean = false,
-    val subTasks: List<SubTaskItem>
-)
-
-data class SubTaskItem(
-    val name: String,
-    val cost: String,
-    var isChecked: Boolean = false
-)
-
-class TaskAdapter(private val context: Context, private val taskList: MutableList<TaskItem>) : BaseAdapter() {
-
-    override fun getCount(): Int = taskList.size
-
-    override fun getItem(position: Int): Any = taskList[position]
-
-    override fun getItemId(position: Int): Long = position.toLong()
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.tasks_list, parent, false)
-
-        val checkBoxMain = view.findViewById<CheckBox>(R.id.check_main_task)
-        val textMainTask = view.findViewById<TextView>(R.id.text_main_task)
-        val arrowExpand = view.findViewById<ImageView>(R.id.arrow_expand)
-        val subTaskContainer = view.findViewById<LinearLayout>(R.id.subtask_container)
-
-        val task = taskList[position]
-        textMainTask.text = "${task.name} - ${task.cost}"
-        checkBoxMain.isChecked = task.isChecked
-        subTaskContainer.visibility = if (task.isExpanded) View.VISIBLE else View.GONE
-        arrowExpand.setImageResource(if (task.isExpanded) R.drawable.ic_arrow_down else R.drawable.ic_arrow_up)
-
-
-        checkBoxMain.setOnCheckedChangeListener { _, isChecked ->
-            task.isChecked = isChecked
-            val intent: Intent = Intent(context, SelectSupplier::class.java)
-            context!!.startActivity(intent)
-        }
-
-        textMainTask.setOnClickListener {
-            val intent: Intent = Intent(context, TaskDetail::class.java)
-            intent.putExtra("taskName", task.name)
-            context.startActivity(intent)
-
-        }
-
-        arrowExpand.setOnClickListener {
-            task.isExpanded = !task.isExpanded
-            notifyDataSetChanged()
-        }
-
-        subTaskContainer.removeAllViews()
-
-        for (subTask in task.subTasks) {
-            val subTaskView = LayoutInflater.from(context).inflate(R.layout.subtask_list, subTaskContainer, false)
-            val checkBoxSubTask = subTaskView.findViewById<CheckBox>(R.id.check_sub_task)
-            val textSubTask = subTaskView.findViewById<TextView>(R.id.text_sub_task)
-
-            textSubTask.text = "${subTask.name} - ${subTask.cost}"
-            checkBoxSubTask.isChecked = subTask.isChecked
-
-            checkBoxSubTask.setOnCheckedChangeListener { _, isChecked ->
-                subTask.isChecked = isChecked
-                val intent: Intent = Intent(context, SelectSupplier::class.java)
-                context!!.startActivity(intent)
+            val btn_event_estadistic: TextView = findViewById(R.id.btn_event_estadistic)
+            btn_event_estadistic.setOnClickListener {
+                val intent: Intent = Intent(this, EventStatistics::class.java)
+                startActivity(intent)
             }
 
-            subTaskContainer.addView(subTaskView)
-        }
+            val btn_add_event =
+                findViewById(R.id.btn_add_event) as com.google.android.material.floatingactionbutton.FloatingActionButton
 
-        return view
+            btn_add_event.setOnClickListener {
+                val intent: Intent = Intent(this, AddTask::class.java)
+                startActivity(intent)
+            }
+
+        }
+    }
+
+    data class TaskItem(
+        val id: String,
+        val name: String,
+        val cost: String,
+        var isChecked: Boolean = false,
+        var isExpanded: Boolean = false,
+        val subTasks: List<SubTaskItem>
+    )
+
+    data class SubTaskItem(
+        val id: String,
+        val name: String,
+        val cost: String,
+        var isChecked: Boolean = false,
+        val taskId: String
+    )
+
+    class TaskAdapter(
+        private val context: Context,
+        private val taskList: MutableList<TaskItem>,
+        private val eventId: String
+    ) : BaseAdapter() {
+
+        private val db = FirebaseFirestore.getInstance()
+
+        override fun getCount(): Int = taskList.size
+
+        override fun getItem(position: Int): Any = taskList[position]
+
+        override fun getItemId(position: Int): Long = position.toLong()
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            val view: View = convertView ?: LayoutInflater.from(context)
+                .inflate(R.layout.tasks_list, parent, false)
+
+            val checkBoxMain = view.findViewById<CheckBox>(R.id.check_main_task)
+            val textMainTask = view.findViewById<TextView>(R.id.text_main_task)
+            val arrowExpand = view.findViewById<ImageView>(R.id.arrow_expand)
+            val subTaskContainer = view.findViewById<LinearLayout>(R.id.subtask_container)
+
+            val task = taskList[position]
+            textMainTask.text = "${task.name} - ${task.cost}"
+            checkBoxMain.isChecked = task.isChecked
+            subTaskContainer.visibility = if (task.isExpanded) View.VISIBLE else View.GONE
+            arrowExpand.setImageResource(if (task.isExpanded) R.drawable.ic_arrow_down else R.drawable.ic_arrow_up)
+
+            checkBoxMain.setOnCheckedChangeListener { _, isChecked ->
+                task.isChecked = isChecked
+                db.collection("Eventos").document(eventId)
+                    .collection("Tareas").document(task.id)
+                    .update("terminado", isChecked)
+            }
+
+            textMainTask.setOnClickListener {
+                val intent: Intent = Intent(context, TaskDetail::class.java)
+                intent.putExtra("taskName", task.name)
+                context.startActivity(intent)
+
+            }
+
+            arrowExpand.setOnClickListener {
+                task.isExpanded = !task.isExpanded
+                notifyDataSetChanged()
+            }
+
+            subTaskContainer.removeAllViews()
+
+            for (subTask in task.subTasks) {
+                val subTaskView = LayoutInflater.from(context)
+                    .inflate(R.layout.subtask_list, subTaskContainer, false)
+                val checkBoxSubTask = subTaskView.findViewById<CheckBox>(R.id.check_sub_task)
+                val textSubTask = subTaskView.findViewById<TextView>(R.id.text_sub_task)
+
+                textSubTask.text = "${subTask.name} - ${subTask.cost}"
+                checkBoxSubTask.isChecked = subTask.isChecked
+
+                checkBoxSubTask.setOnCheckedChangeListener { _, isChecked ->
+                    subTask.isChecked = isChecked
+                    db.collection("Eventos").document(eventId)
+                        .collection("Tareas").document(subTask.taskId)
+                        .collection("Subtareas").document(subTask.id)
+                        .update("terminado", isChecked)
+                }
+
+                subTaskContainer.addView(subTaskView)
+            }
+
+            return view
+        }
     }
 }
