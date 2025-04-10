@@ -59,20 +59,29 @@ class ChoseEvent : AppCompatActivity() {
                     val nombre = document.getString("nombre") ?: "Sin nombre"
                     val presupuesto = document.get("presupuesto")?.toString() ?: "0"
                     val tipo = document.getString("tipo") ?: "Sin tipo"
+                    var imagen = R.drawable.lain
+
+                    when (tipo) {
+                        "Boda" -> imagen = R.drawable.boda
+                        "Social" -> imagen = R.drawable.social
+                        "Fiesta" -> imagen = R.drawable.fiesta
+                        "Quinceañera" -> imagen = R.drawable.quinceanera
+                    }
 
                     eventsOverview.add(
                         EventOverview(
-                            R.drawable.lain,
+                            imagen,
                             nombre,
                             presupuesto,
-                            tipo
+                            tipo,
+                            document.id
                         )
                     )
                 }
-                adapter?.notifyDataSetChanged() // Actualiza la lista en pantalla
+                adapter?.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
-                e.printStackTrace() // Muestra el error en la consola
+                e.printStackTrace()
             }
     }
 
@@ -116,6 +125,7 @@ class EventOverviewAdapter: BaseAdapter {
 
         view.setOnClickListener {
             val intent = Intent(context, EventDetail::class.java)
+            intent.putExtra("eventId", eventOverview.id)
             context!!.startActivity(intent)
         }
 

@@ -7,7 +7,7 @@
     <dimen name="title_sign_up_width">250dp</dimen>
     <dimen name="header_height">90dp</dimen>
     <dimen name="img_event_overview">90dp</dimen>
-    <dimen name="img_arrow_right">50dp</dimen>
+    <dimen name="img_arrow_right">40dp</dimen>
     <dimen name="linear_layout_event_overview">190dp</dimen>
     <dimen name="title_size_max">50sp</dimen>
     <dimen name="title_size">25sp</dimen>

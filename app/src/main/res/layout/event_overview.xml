@@ -31,6 +31,7 @@
             android:text="@string/eg_event_name"
             android:fontFamily="@string/typo_normal_text"
             android:textSize="@dimen/title_size"
+            android:textColor="@color/black"
             />
 
         <LinearLayout
@@ -44,6 +45,7 @@
                 android:text="@string/sym_money"
                 android:fontFamily="@string/typo_normal_text"
                 android:textSize="@dimen/text_size"
+                android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/event_budget_overview"
@@ -52,6 +54,7 @@
                 android:text="@string/eg_event_budget"
                 android:fontFamily="@string/typo_normal_text"
                 android:textSize="@dimen/text_size"
+                android:textColor="@color/black"
                 />
         </LinearLayout>
         <TextView
@@ -60,6 +63,7 @@
             android:layout_height="match_parent"
             android:textSize="@dimen/low_size"
             android:text="@string/eg_event_category"
+            android:textColor="@color/black"
             />
     </LinearLayout>
     <ImageView

@@ -16,6 +16,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.firestore.FirebaseFirestore
 
 class EventDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,17 +28,49 @@ class EventDetail : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val db = FirebaseFirestore.getInstance()
+        val eventId = intent.getStringExtra("eventId")
+
         val listView = findViewById<ListView>(R.id.list_view)
+        val txtEventName = findViewById<TextView>(R.id.event_name_detail)
+        val txtEventBudget = findViewById<TextView>(R.id.event_budget_detail)
 
-        val tasks = mutableListOf(
-            TaskItem("Comida", "$800", subTasks = listOf(
-                SubTaskItem("Platos", "$50"),
-                SubTaskItem("Lechugas", "$50")
+        val tasks = mutableListOf<TaskItem>()
 
-            )),
-            TaskItem("Sillas", "$1800", subTasks = listOf()),
-            TaskItem("Mesas", "$2800", subTasks = listOf())
-        )
+        if (eventId != null) {
+            db.collection("Eventos").document(eventId).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val nombreEvento = document.getString("nombre") ?: "Sin nombre"
+                        val presupuesto = document.get("presupuesto")?.toString() ?: "0"
+
+                        txtEventName.text = nombreEvento
+                        txtEventBudget.text = presupuesto
+
+                        val tareaList = document.get("Tarea") as? List<Map<*, *>>
+
+                        if (tareaList != null) {
+                            for (tarea in tareaList) {
+                                val nombreTarea = tarea["nombre"] as? String ?: ""
+                                val presupuestoTarea = tarea["presupuesto"]?.toString() ?: "0"
+                                val subtareasRaw = tarea["Subtarea"] as? List<Map<*, *>> ?: listOf()
+
+                                val subTasks = subtareasRaw.map {
+                                    SubTaskItem(
+                                        name = it["nombre"] as? String ?: "",
+                                        cost = it["presupuesto"]?.toString() ?: "0"
+                                    )
+                                }
+
+                                tasks.add(TaskItem(nombreTarea, presupuestoTarea, subTasks = subTasks))
+                            }
+                        }
+
+                        val adapter = TaskAdapter(this, tasks)
+                        listView.adapter = adapter
+                    }
+                }
+        }
 
         val btn_event_estadistic: TextView = findViewById(R.id.btn_event_estadistic)
         btn_event_estadistic.setOnClickListener {
@@ -103,7 +136,6 @@ class TaskAdapter(private val context: Context, private val taskList: MutableLis
 
         textMainTask.setOnClickListener {
             val intent: Intent = Intent(context, TaskDetail::class.java)
-            //aqui seria q mandamos el id de la tarea para q se acedda ahi, o mandarlo en dtos, ya veremos
             intent.putExtra("taskName", task.name)
             context.startActivity(intent)
 

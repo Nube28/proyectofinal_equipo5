@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignUp : AppCompatActivity() {
 
@@ -54,12 +55,29 @@ class SignUp : AppCompatActivity() {
     }
 
     fun signUp(name: String, email: String, password: String){
+        val db = FirebaseFirestore.getInstance()
+
         Log.d("INFO", "email: ${email}, password: ${password}")
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if(task.isSuccessful){
                     Log.d("INFO", "signInWithEmail:success")
                     val user = auth.currentUser
+
+                    val usuario = hashMapOf(
+                        "nombre" to name,
+                        "usuarioId" to user!!.uid
+                    )
+
+                    db.collection("Usuarios")
+                        .add(usuario)
+                        .addOnSuccessListener {
+                            Log.d("INFO", "signInNameAndId:success")
+                        }
+                        .addOnFailureListener {
+                            Log.w("ERROR", "signInNameAndId:failure", task.exception)
+                        }
+
                 } else {
                     Log.w("ERROR", "signInWithEmail:failure", task.exception)
                     Toast.makeText(

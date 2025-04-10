@@ -3,7 +3,7 @@
         Todo el texto del proyecto está aquí y la estructura es Etiqueta_Nombre_Complemento
         Ctrl+R para buscar el texto si te da flojera
      -->
-    <string name="app_name">PlanificadorDeEventos</string>
+    <string name="app_name">Planificador de Eventos</string>
     <string name="title_main">¡BIENVENIDO A TU\n PLANIFICADOR DE EVENTOS!</string>
     <string name="lb_email">Correo:</string>
     <string name="hint_email">Correo@ejemplo.com</string>

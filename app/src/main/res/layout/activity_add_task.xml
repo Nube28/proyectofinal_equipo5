@@ -80,7 +80,6 @@
             />
 
         <TextView
-            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@string/typo_normal_text"
@@ -89,6 +88,7 @@
             android:paddingLeft="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_low"
             android:textStyle="bold"
+            android:textColor="@color/black"
             />
 
         <EditText
