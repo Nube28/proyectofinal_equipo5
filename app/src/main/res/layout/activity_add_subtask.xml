@@ -14,40 +14,39 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height"
         android:name="equipo5.proyectofinal.planificadordeeventos.HeaderProfile"
-        tools:layout="@layout/fragment_header_profile"
-        />
+        tools:layout="@layout/fragment_header_profile" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="@dimen/margin_low"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_create_subtask"
-            android:textSize="@dimen/title_size"
-            android:textColor="@color/orange"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_three_five"
             android:fontFamily="@string/typo_title"
-            android:textStyle="bold"
-            android:padding="@dimen/margin_low" />
+            android:gravity="center_horizontal"
+            android:padding="@dimen/margin_verylow"
+            android:text="@string/title_create_subtask"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/title_size"
+            android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/img_globos"
             android:layout_marginStart="@dimen/margin_low"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_low"
             android:src="@drawable/globos" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_low">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -56,22 +55,22 @@
             android:fontFamily="@string/typo_normal_text"
             android:text="@string/lb_subtask_name"
             android:textSize="@dimen/text_size"
-            android:paddingLeft="@dimen/margin_normal"
+            android:paddingStart="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_low"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_subtask_name"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/four_five"
             android:hint="@string/hint_name"
             android:fontFamily="@string/typo_normal_text"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
             android:inputType="textPersonName"
-            android:textSize="20sp"
-            android:background="@drawable/btn_border"/>
-            />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            android:background="@drawable/btn_border" />
 
         <TextView
             android:layout_width="match_parent"
@@ -80,22 +79,22 @@
             android:text="@string/lb_subtask_description"
             android:fontFamily="@string/typo_normal_text"
             android:textSize="@dimen/text_size"
-            android:paddingLeft="@dimen/margin_normal"
+            android:paddingStart="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_low"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_task_description"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/four_five"
             android:hint="@string/hint_task_description"
             android:fontFamily="@string/typo_normal_text"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
             android:inputType="text"
-            android:textSize="20sp"
-            android:background="@drawable/btn_border"/>
-            />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            android:background="@drawable/btn_border" />
 
         <TextView
             android:layout_width="match_parent"
@@ -104,21 +103,22 @@
             android:text="@string/lb_task_budget"
             android:fontFamily="@string/typo_normal_text"
             android:textSize="@dimen/text_size"
-            android:paddingLeft="@dimen/margin_normal"
+            android:paddingStart="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_low"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_task_budget"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/four_five"
             android:hint="@string/hint_task_budget"
             android:fontFamily="@string/typo_normal_text"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
             android:inputType="numberDecimal"
-            android:textSize="20sp"
-            android:background="@drawable/btn_border"/>/>
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            android:background="@drawable/btn_border" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -128,8 +128,7 @@
         android:text="@string/btn_register"
         android:background="@drawable/btn_background"
         android:textColor="@color/beigeLight"
-        android:padding="10dp"
+        android:padding="@dimen/margin_low"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_low"
-        />
+        android:layout_marginTop="@dimen/padding_text" />
 </LinearLayout>
