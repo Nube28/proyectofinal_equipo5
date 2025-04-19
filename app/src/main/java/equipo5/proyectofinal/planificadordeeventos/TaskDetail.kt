@@ -9,85 +9,92 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.FirebaseFirestore
 
 class TaskDetail : AppCompatActivity() {
 
-    var adapter: SubtaskOverviewAdapter? = null
-    var subtasksOverview = ArrayList<SubtaskOverview>()
+    private var adapter: SubtaskOverviewAdapter? = null
+    private val subtasksOverview = ArrayList<SubtaskOverview>()
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_task_detail)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val btn_add_event = findViewById(R.id.btn_add_event) as com.google.android.material.floatingactionbutton.FloatingActionButton
+        val btnAddEvent = findViewById<FloatingActionButton>(R.id.btn_add_event)
+        val listView: ListView = findViewById(R.id.list_view)
 
-        btn_add_event.setOnClickListener{
-            val intent: Intent = Intent(this, AddSubtask::class.java)
-            startActivity(intent)
+        btnAddEvent.setOnClickListener {
+            startActivity(Intent(this, AddSubtask::class.java))
         }
 
-        var listView: ListView = findViewById(R.id.list_view) as ListView
-
-        cargarSubtareas()
         adapter = SubtaskOverviewAdapter(this, subtasksOverview)
         listView.adapter = adapter
 
+        cargarSubtareasDesdeFirestore()
     }
 
-    fun cargarSubtareas(){
-        subtasksOverview.add(SubtaskOverview("Platos", 50))
-        subtasksOverview.add(SubtaskOverview("Lechugas", 150))
-        subtasksOverview.add(SubtaskOverview("Platillos", 350))
-    }
-}
-
-class SubtaskOverviewAdapter: BaseAdapter{
-    var subtasksOverview = ArrayList<SubtaskOverview>()
-    var context: Context? = null
-
-    constructor(context: Context, subtasksOverview: ArrayList<SubtaskOverview>){
-        this.context = context
-        this.subtasksOverview = subtasksOverview
-    }
-
-    override fun getCount(): Int {
-        return subtasksOverview.size
-    }
-
-    override fun getItem(position: Int): Any {
-        return subtasksOverview[position]
+    private fun cargarSubtareasDesdeFirestore() {
+        db.collection("Subtareas").get()
+            .addOnSuccessListener { documents ->
+                subtasksOverview.clear()
+                for (document in documents) {
+                    val nombre = document.getString("nombre") ?: ""
+                    val presupuesto = document.getDouble("presupuesto")?.toInt() ?: 0
+                    val descripcion = document.getString("descripcion") ?: ""
+                    val subtask = SubtaskOverview(
+                        tv_subtask_name = nombre,
+                        tv_subtask_budget = presupuesto,
+                        tv_subtask_description = descripcion
+                    )
+                    subtasksOverview.add(subtask)
+                }
+                adapter?.notifyDataSetChanged()
+            }
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    class SubtaskOverviewAdapter(
+        private val context: Context,
+        private val subtasksOverview: ArrayList<SubtaskOverview>
+    ) : BaseAdapter() {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var subtaskOverview = subtasksOverview[position]
-        var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var view = inflator.inflate(R.layout.subtask_overview, null)
+        override fun getCount(): Int = subtasksOverview.size
 
-        val tv_subtask_name = view.findViewById(R.id.tv_subtask_name) as TextView
-        val tv_subtask_budget = view.findViewById(R.id.tv_subtask_budget) as TextView
+        override fun getItem(position: Int): Any = subtasksOverview[position]
 
-        tv_subtask_name.text = subtaskOverview.tv_subtask_name
-        tv_subtask_budget.text = subtaskOverview.tv_subtask_budget.toString()
+        override fun getItemId(position: Int): Long = position.toLong()
 
-        view.setOnClickListener{
-            val intent = Intent(context, SubtaskDetail::class.java)
-            context!!.startActivity(intent)
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            val subtaskOverview = subtasksOverview[position]
+            val view = convertView ?: LayoutInflater.from(context)
+                .inflate(R.layout.subtask_overview, parent, false)
+
+            val tvSubtaskName = view.findViewById<TextView>(R.id.tv_subtask_name)
+            val tvSubtaskBudget = view.findViewById<TextView>(R.id.tv_subtask_budget)
+
+            tvSubtaskName.text = subtaskOverview.tv_subtask_name
+            tvSubtaskBudget.text = "${subtaskOverview.tv_subtask_budget} Pesos"
+
+            view.setOnClickListener {
+                val intent = Intent(context, SubtaskDetail::class.java).apply {
+                    putExtra("nombre", subtaskOverview.tv_subtask_name)
+                    putExtra("descripcion", subtaskOverview.tv_subtask_description)
+                    putExtra("presupuesto", subtaskOverview.tv_subtask_budget)
+                }
+                context.startActivity(intent)
+            }
+
+            return view
         }
-
-        return view
     }
 }
