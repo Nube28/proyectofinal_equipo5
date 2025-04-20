@@ -37,10 +37,21 @@ class AddSupplier : AppCompatActivity() {
         // Evento del botón
         btnRegisterSupplier.setOnClickListener {
             val nombreProveedor = etProviderName.text.toString().trim()
-            val precioProducto = etProductPrice.text.toString().toDoubleOrNull() ?: 0.0
+            val precioProductoText = etProductPrice.text.toString().trim()
 
             if (nombreProveedor.isEmpty()) {
                 Toast.makeText(this, "El nombre del proveedor es obligatorio", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (precioProductoText.isEmpty()) {
+                Toast.makeText(this, "El precio del producto es obligatorio", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val precioProducto = precioProductoText.toDoubleOrNull()
+            if (precioProducto == null) {
+                Toast.makeText(this, "El precio debe ser un número válido", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -54,13 +65,22 @@ class AddSupplier : AppCompatActivity() {
                 "fecha" to Timestamp.now()
             )
 
+            // Mostrar mensaje de carga
+            val cargandoToast = Toast.makeText(this, "Guardando proveedor...", Toast.LENGTH_SHORT)
+            cargandoToast.show()
+
             // Guardar en Firestore
             db.collection("Proveedores").add(proveedor)
                 .addOnSuccessListener {
+                    cargandoToast.cancel()
                     Toast.makeText(this, "Proveedor guardado con éxito", Toast.LENGTH_SHORT).show()
                     limpiarCampos(etProviderName, etProductPrice)
+
+                    // Termina la actividad y regresa a la anterior
+                    finish()
                 }
                 .addOnFailureListener { e ->
+                    cargandoToast.cancel()
                     Toast.makeText(this, "Error al guardar: ${e.message}", Toast.LENGTH_LONG).show()
                 }
         }
