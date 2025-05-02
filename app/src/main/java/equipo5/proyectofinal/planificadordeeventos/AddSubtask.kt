@@ -8,17 +8,19 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddSubtask : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_subtask)
 
-        // Ajustes para que los elementos se adapten a la pantalla
+        // Ajuste de ventanas
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -26,8 +28,8 @@ class AddSubtask : AppCompatActivity() {
         }
 
         db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
-        // Referencias a los EditText
         val etNombre = findViewById<EditText>(R.id.et_subtask_name)
         val etDescripcion = findViewById<EditText>(R.id.et_task_description)
         val etPresupuesto = findViewById<EditText>(R.id.et_task_budget)
@@ -39,13 +41,18 @@ class AddSubtask : AppCompatActivity() {
             val presupuestoTexto = etPresupuesto.text.toString().trim()
             val presupuesto = presupuestoTexto.toIntOrNull()
 
-            // Validación de los campos
+            // Validación
             if (nombre.isEmpty() || descripcion.isEmpty() || presupuesto == null) {
                 Toast.makeText(this, "Todos los campos son obligatorios y el presupuesto debe ser válido", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Crear un objeto de la subtarea
+            val currentUser = auth.currentUser
+            if (currentUser == null) {
+                Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val subtask = hashMapOf(
                 "nombre" to nombre,
                 "descripcion" to descripcion,
@@ -53,8 +60,11 @@ class AddSubtask : AppCompatActivity() {
                 "fecha" to Timestamp.now()
             )
 
-            // Guardar en Firestore
-            db.collection("Subtareas").add(subtask)
+
+            db.collection("users")
+                .document(currentUser.uid)
+                .collection("subtareas")
+                .add(subtask)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Subtarea guardada con éxito", Toast.LENGTH_SHORT).show()
                     etNombre.text.clear()
