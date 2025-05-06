@@ -14,7 +14,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class AddSupplier : AppCompatActivity() {
 
-    // Referencias a Firestore y Auth
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
 
@@ -23,14 +22,12 @@ class AddSupplier : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_add_supplier)
 
-        // Ajuste para que la vista considere las barras del sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inicializa Firebase
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
@@ -40,20 +37,17 @@ class AddSupplier : AppCompatActivity() {
             finish()
             return
         }
-        val uid = currentUser.uid // ID del usuario autenticado
+        val uid = currentUser.uid
 
-        // Referencias a elementos de la interfaz
         val etProviderName = findViewById<EditText>(R.id.et_provider_name)
         val etProductPrice = findViewById<EditText>(R.id.et_product_price)
         val tvProviderNameSpace = findViewById<TextView>(R.id.et_provider_name_space)
         val btnRegisterSupplier = findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btn_register_supplier)
 
-        // Evento del botón
         btnRegisterSupplier.setOnClickListener {
             val nombreProveedor = etProviderName.text.toString().trim()
             val precioProductoText = etProductPrice.text.toString().trim()
 
-            // Validaciones
             if (nombreProveedor.isEmpty()) {
                 Toast.makeText(this, "El nombre del proveedor es obligatorio", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -70,40 +64,31 @@ class AddSupplier : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Actualiza el TextView con el nombre
             tvProviderNameSpace.text = nombreProveedor
 
-            // Crea el objeto proveedor
             val proveedor = hashMapOf(
                 "nombre" to nombreProveedor,
                 "precio" to precioProducto,
                 "fecha" to Timestamp.now()
             )
 
-            // Muestra mensaje mientras guarda
-            val cargandoToast = Toast.makeText(this, "Guardando proveedor...", Toast.LENGTH_SHORT)
-            cargandoToast.show()
+            val eventoId = intent.getStringExtra("eventoId")
+            val tareaId = intent.getStringExtra("tareaId")
+            val subTareaId = intent.getStringExtra("subtareaId")
 
-            // Guarda en la subcolección del usuario
-            db.collection("users").document(uid).collection("proveedores")
+
+            db.collection("Eventos").document(eventoId.toString())
+                .collection("Tareas").document(tareaId.toString())
+                .collection("Subtareas").document(subTareaId.toString())
+                .collection("Proveedor")
                 .add(proveedor)
                 .addOnSuccessListener {
-                    cargandoToast.cancel()
                     Toast.makeText(this, "Proveedor guardado con éxito", Toast.LENGTH_SHORT).show()
-                    limpiarCampos(etProviderName, etProductPrice)
-                    finish() // Cierra la actividad
+                    finish()
                 }
                 .addOnFailureListener { e ->
-                    cargandoToast.cancel()
                     Toast.makeText(this, "Error al guardar: ${e.message}", Toast.LENGTH_LONG).show()
                 }
-        }
-    }
-
-    // Limpia los campos de texto
-    private fun limpiarCampos(vararg campos: EditText) {
-        for (campo in campos) {
-            campo.text.clear()
         }
     }
 }

@@ -25,27 +25,28 @@ class SubtaskDetail : AppCompatActivity() {
             insets
         }
 
-        // Inicializar Firestore
         db = FirebaseFirestore.getInstance()
 
-        // Recibir los datos del Intent
         val nombre = intent.getStringExtra("nombre") ?: "Sin nombre"
         val descripcion = intent.getStringExtra("descripcion") ?: "Sin descripción"
         val presupuesto = intent.getIntExtra("presupuesto", 0)
 
-        // Establecer el nombre de la subtarea en el TextView
         findViewById<TextView>(R.id.task_name_detail).text = nombre
 
-        // Reemplazar texto de ejemplo con la descripción y presupuesto
         val rootView = findViewById<View>(R.id.main)
         findAndReplaceLoremIpsum(rootView, descripcion, presupuesto)
 
-        // Guardar los datos en Firestore
         saveSubtaskToFirestore(nombre, descripcion, presupuesto)
 
-        // Botón para añadir proveedor
+        val eventId = intent.getStringExtra("eventoId")
+        val taskId = intent.getStringExtra("tareaId")
+        val subtaskId = intent.getStringExtra("subtareaId")
+
         findViewById<AppCompatButton>(R.id.btn_add_supplier).setOnClickListener {
             val intent = Intent(this, AddSupplier::class.java)
+            intent.putExtra("eventoId", eventId)
+            intent.putExtra("tareaId", taskId)
+            intent.putExtra("subtareaId", subtaskId)
             startActivity(intent)
         }
     }

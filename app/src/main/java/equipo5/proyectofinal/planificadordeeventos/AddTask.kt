@@ -26,16 +26,15 @@ class AddTask : AppCompatActivity() {
             insets
         }
 
-        // Inicializa Firestore
         db = FirebaseFirestore.getInstance()
 
-        // Referencias a los elementos de la interfaz
         val etTaskName = findViewById<EditText>(R.id.et_task_name)
         val etTaskDescription = findViewById<EditText>(R.id.et_task_description)
         val etTaskBudget = findViewById<EditText>(R.id.et_task_budget)
         val btnRegisterTask = findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btn_add_task)
 
-        // Evento del botón
+        val eventoId = intent.getStringExtra("eventoId")
+
         btnRegisterTask.setOnClickListener {
             val nombreTarea = etTaskName.text.toString().trim()
             val descripcionTarea = etTaskDescription.text.toString().trim()
@@ -46,7 +45,6 @@ class AddTask : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Crear objeto de tarea
             val tarea = hashMapOf(
                 "nombre" to nombreTarea,
                 "descripcion" to descripcionTarea,
@@ -54,22 +52,15 @@ class AddTask : AppCompatActivity() {
                 "fecha" to Timestamp.now()
             )
 
-            // Guardar en Firestore
-            db.collection("Tareas").add(tarea)
+            db.collection("Eventos").document(eventoId.toString())
+                .collection("Tareas").add(tarea)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Tarea guardada con éxito", Toast.LENGTH_SHORT).show()
-                    limpiarCampos(etTaskName, etTaskDescription, etTaskBudget)
+                    finish()
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Error al guardar: ${e.message}", Toast.LENGTH_LONG).show()
                 }
-        }
-    }
-
-    // Función para limpiar los campos después de guardar
-    private fun limpiarCampos(vararg campos: EditText) {
-        for (campo in campos) {
-            campo.text.clear()
         }
     }
 }

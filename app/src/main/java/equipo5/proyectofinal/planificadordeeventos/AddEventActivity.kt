@@ -43,7 +43,8 @@ class AddEventActivity : AppCompatActivity() {
                 "presupuesto" to presupuesto,
                 "descripcion" to descripcion,
                 "tipo" to tipo,
-                "usuarioId" to userId
+                "usuarioId" to userId,
+                "gasto" to 0
             )
 
             db.collection("Eventos")

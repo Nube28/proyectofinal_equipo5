@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -98,7 +99,6 @@ class EventDetail : AppCompatActivity() {
 
                                             tareasCargadas++
                                             if (tareasCargadas == tareasTotales) {
-                                                // Configurar el adaptador una vez que todas las tareas estén cargadas
                                                 val adapter = TaskAdapter(this, tempTasks, eventId)
                                                 listView.adapter = adapter
                                             }
@@ -119,6 +119,7 @@ class EventDetail : AppCompatActivity() {
 
             btn_add_event.setOnClickListener {
                 val intent: Intent = Intent(this, AddTask::class.java)
+                intent.putExtra("eventoId", eventId)
                 startActivity(intent)
             }
 
@@ -180,7 +181,8 @@ class EventDetail : AppCompatActivity() {
 
             textMainTask.setOnClickListener {
                 val intent: Intent = Intent(context, TaskDetail::class.java)
-                intent.putExtra("taskName", task.name)
+                intent.putExtra("eventoId", eventId)
+                intent.putExtra("tareaId", task.id)
                 context.startActivity(intent)
 
             }

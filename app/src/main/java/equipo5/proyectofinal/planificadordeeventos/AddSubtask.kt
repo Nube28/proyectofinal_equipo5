@@ -61,9 +61,12 @@ class AddSubtask : AppCompatActivity() {
             )
 
 
-            db.collection("users")
-                .document(currentUser.uid)
-                .collection("subtareas")
+            val eventoId = intent.getStringExtra("eventoId")
+            val tareaId = intent.getStringExtra("tareaId")
+
+            db.collection("Eventos").document(eventoId.toString())
+                .collection("Tareas").document(tareaId.toString())
+                .collection("Subtareas")
                 .add(subtask)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Subtarea guardada con éxito", Toast.LENGTH_SHORT).show()

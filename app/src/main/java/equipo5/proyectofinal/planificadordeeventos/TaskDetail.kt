@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -31,21 +32,40 @@ class TaskDetail : AppCompatActivity() {
             insets
         }
 
-        val btnAddEvent = findViewById<FloatingActionButton>(R.id.btn_add_event)
+        val btn_add_subtask = findViewById<FloatingActionButton>(R.id.btn_add_subtask)
         val listView: ListView = findViewById(R.id.list_view)
 
-        btnAddEvent.setOnClickListener {
-            startActivity(Intent(this, AddSubtask::class.java))
+        val eventId = intent.getStringExtra("eventoId")
+        val taskId = intent.getStringExtra("tareaId")
+
+        btn_add_subtask.setOnClickListener {
+            val intent: Intent = Intent(this, AddSubtask::class.java)
+            intent.putExtra("eventoId", eventId)
+            intent.putExtra("tareaId", taskId)
+            startActivity(intent)
         }
 
-        adapter = SubtaskOverviewAdapter(this, subtasksOverview)
+        adapter = SubtaskOverviewAdapter(this, subtasksOverview, eventId, taskId)
         listView.adapter = adapter
 
         cargarSubtareasDesdeFirestore()
     }
 
+    override fun onResume() {
+        super.onResume()
+        cargarSubtareasDesdeFirestore()
+    }
+
     private fun cargarSubtareasDesdeFirestore() {
-        db.collection("Subtareas").get()
+        val eventId = intent.getStringExtra("eventoId") ?: return
+        val taskId = intent.getStringExtra("tareaId") ?: return
+
+        db.collection("Eventos")
+            .document(eventId)
+            .collection("Tareas")
+            .document(taskId)
+            .collection("Subtareas")
+            .get()
             .addOnSuccessListener { documents ->
                 subtasksOverview.clear()
                 for (document in documents) {
@@ -55,17 +75,23 @@ class TaskDetail : AppCompatActivity() {
                     val subtask = SubtaskOverview(
                         tv_subtask_name = nombre,
                         tv_subtask_budget = presupuesto,
-                        tv_subtask_description = descripcion
+                        tv_subtask_description = descripcion,
+                        subtaskId = document.id
                     )
                     subtasksOverview.add(subtask)
                 }
                 adapter?.notifyDataSetChanged()
             }
+            .addOnFailureListener {
+                Toast.makeText(this, "Error al cargar subtareas", Toast.LENGTH_SHORT).show()
+            }
     }
 
     class SubtaskOverviewAdapter(
         private val context: Context,
-        private val subtasksOverview: ArrayList<SubtaskOverview>
+        private val subtasksOverview: ArrayList<SubtaskOverview>,
+        private val eventId: String?,
+        private val taskId: String?
     ) : BaseAdapter() {
 
         override fun getCount(): Int = subtasksOverview.size
@@ -86,10 +112,16 @@ class TaskDetail : AppCompatActivity() {
             tvSubtaskBudget.text = "${subtaskOverview.tv_subtask_budget} Pesos"
 
             view.setOnClickListener {
+                //OLA KAT ESTO NO DEBERIA DE MANDAR LOS PIMEROS 3 PUTEXTRA, debe de jalarlos de la base de datos en la siguiente pagina salu2
                 val intent = Intent(context, SubtaskDetail::class.java).apply {
                     putExtra("nombre", subtaskOverview.tv_subtask_name)
                     putExtra("descripcion", subtaskOverview.tv_subtask_description)
                     putExtra("presupuesto", subtaskOverview.tv_subtask_budget)
+
+                    //ESTOS NO LOS TOQUES KAT
+                    putExtra("eventoId", eventId)
+                    putExtra("tareaId", taskId)
+                    putExtra("subtareaId", subtaskOverview.subtaskId)
                 }
                 context.startActivity(intent)
             }
