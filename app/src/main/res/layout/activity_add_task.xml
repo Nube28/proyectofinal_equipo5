@@ -68,7 +68,8 @@
             android:layout_marginRight="@dimen/margin_normal"
             android:hint="@string/hint_name"
             android:inputType="textPersonName"
-            android:background="@drawable/btn_border" />
+            android:background="@drawable/btn_border"
+            android:textColor="@color/black"/>
 
         <!-- Descripción de la tarea -->
         <TextView
@@ -91,7 +92,8 @@
             android:layout_marginRight="@dimen/margin_normal"
             android:hint="@string/hint_task_description"
             android:inputType="text"
-            android:background="@drawable/btn_border" />
+            android:background="@drawable/btn_border"
+            android:textColor="@color/black"/>
 
         <!-- Presupuesto de la tarea -->
         <TextView
@@ -114,7 +116,8 @@
             android:layout_marginRight="@dimen/margin_normal"
             android:hint="@string/hint_task_budget"
             android:inputType="numberDecimal"
-            android:background="@drawable/btn_border" />
+            android:background="@drawable/btn_border"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
