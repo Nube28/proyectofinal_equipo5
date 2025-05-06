@@ -75,6 +75,7 @@ class SelectSupplier : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 supplierOverview.clear()
+                adapter?.notifyDataSetChanged()
                 for (document in result) {
                     val nombre = document.getString("nombre") ?: ""
                     val precio = document.getDouble("precio") ?: 0.0
@@ -91,7 +92,9 @@ class SelectSupplier : AppCompatActivity() {
     // Adaptador para mostrar la lista de proveedores
     inner class SupplierOverviewAdapter(private val context: Context, private val supplierList: ArrayList<SupplierOverview>) : BaseAdapter() {
 
-        override fun getCount(): Int = supplierList.size
+        override fun getCount(): Int {
+            return if (supplierList.isEmpty()) 0 else supplierList.size
+        }
 
         override fun getItem(position: Int): Any = supplierList[position]
 
@@ -111,11 +114,6 @@ class SelectSupplier : AppCompatActivity() {
             // Maneja clic en el checkbox
             checkBox.setOnClickListener {
                 supplierList[position].isSelected = checkBox.isChecked
-            }
-
-            // Mostrar info al hacer clic en el item
-            view.setOnClickListener {
-                Toast.makeText(context, "Proveedor: ${supplier.Supplier_name}, Precio: $${supplier.price}", Toast.LENGTH_SHORT).show()
             }
 
             return view

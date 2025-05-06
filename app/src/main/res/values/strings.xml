@@ -95,6 +95,8 @@
     <string name="lb_old_password">Contraseña anterior:</string>
     <string name="hint_new_password">********</string>
     <string name="hint_old_password">***</string>
+    <string name="send">Enviar</string>
+    <string name="email_changepassword">Se enviara un correo para cambiar su contraseña</string>
 
     <!-- Momez / detalles de la subtarea gad -->
     <string name="title_subtask_detail">Detalles de la subtarea</string>
