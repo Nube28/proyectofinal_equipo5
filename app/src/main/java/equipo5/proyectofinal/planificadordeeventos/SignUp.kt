@@ -57,11 +57,9 @@ class SignUp : AppCompatActivity() {
     fun signUp(name: String, email: String, password: String){
         val db = FirebaseFirestore.getInstance()
 
-        Log.d("INFO", "email: ${email}, password: ${password}")
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if(task.isSuccessful){
-                    Log.d("INFO", "signInWithEmail:success")
                     val user = auth.currentUser
 
                     val usuario = hashMapOf(
@@ -72,19 +70,20 @@ class SignUp : AppCompatActivity() {
                     db.collection("Usuarios")
                         .add(usuario)
                         .addOnSuccessListener {
-                            Log.d("INFO", "signInNameAndId:success")
+                            Log.d("INFO", "Usuario registrado en Firestore")
+
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
-                        .addOnFailureListener {
-                            Log.w("ERROR", "signInNameAndId:failure", task.exception)
+                        .addOnFailureListener { e ->
+                            Log.w("ERROR", "Error al guardar usuario en Firestore", e)
+                            Toast.makeText(this, "Error al guardar usuario", Toast.LENGTH_SHORT).show()
                         }
 
                 } else {
-                    Log.w("ERROR", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "El registro falló",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    Log.w("ERROR", "signUpWithEmail:failure", task.exception)
+                    Toast.makeText(this, "El registro falló", Toast.LENGTH_SHORT).show()
                 }
             }
     }
