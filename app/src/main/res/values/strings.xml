@@ -65,7 +65,7 @@
     <string name="list_places">Listado de los lugares donde se adquirieron los artículos o servicios</string>
     <string name="sale_point">Punto de venta</string>
     <string name="sale_point_name">Globitos Maria</string>
-    <string name="sale_point_description">Venta de globos personalizados</string>
+    <string name="sale_point_cost">500</string>
     <string name="msg_password_dont_match">Las contraseñas no coinciden</string>
 
     <!-- este es el de las tareas y subtareas -->

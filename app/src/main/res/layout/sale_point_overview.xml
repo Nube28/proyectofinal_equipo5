@@ -39,11 +39,11 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/sale_point_description"
+            android:id="@+id/sale_point_cost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
-            android:text="@string/sale_point_description"
+            android:text="@string/sale_point_cost"
             android:textSize="@dimen/ultra_low_size" />
     </LinearLayout>
 

@@ -9,17 +9,20 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import equipo5.proyectofinal.planificadordeeventos.SelectSupplier.SupplierOverviewAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SalePoint : AppCompatActivity() {
     var adapter: SalePointOverviewAdapter? = null
     var salePointOverview = ArrayList<SalePointOverview>()
+    val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,25 +36,59 @@ class SalePoint : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.list_view)
 
-        CrearPuntosDeVenta()
+
         adapter = SalePointOverviewAdapter(this, salePointOverview)
         listView.adapter = adapter
+        CrearPuntosDeVenta()
 
     }
-
+             //no jala AUN
     fun CrearPuntosDeVenta(){
-        salePointOverview.add(SalePointOverview("Tortillas Juan", "Tan bien buenotas las tortillas"))
-        salePointOverview.add(SalePointOverview("Globitos MariCarmen", "Crea tu propio Globo"))
-        salePointOverview.add(SalePointOverview("Tacos el pepe", "El pepe, ete sech"))
+
+        val eventId = intent.getStringExtra("eventoId") ?: return
+        val taskId = intent.getStringExtra("tareaId") ?: return
+        val subtaskId = intent.getStringExtra("subtareaId") ?: return
+
+        db.collection("Eventos").document(eventId).collection("Tareas").document(taskId).collection("Subtareas").document(subtaskId)
+            .collection("Proveedor").get().addOnSuccessListener { documents ->
+                salePointOverview.clear()
+                for (document in documents) {
+
+                    val nombre = document.getString("nombre") ?: "Sin nombre"
+                    val precio = document.getDouble("precio")?.toInt() ?: 0
+
+                    val proveedor = SalePointOverview(
+                        sale_point_name = nombre,
+                        sale_point_cost = precio,
+                        subtaskId = document.id
+
+                    )
+                    salePointOverview.add(proveedor)
+                }
+                adapter?.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                e.printStackTrace()
+            }
     }
-    class SalePointOverviewAdapter(private val context: Context, private val salePointList: ArrayList<SalePointOverview>) : BaseAdapter() {
+    }
+
+
+    class SalePointOverviewAdapter : BaseAdapter {
+        var salePointOverview = ArrayList<SalePointOverview>()
+        var context: Context? = null
+
+        constructor(context: Context, SalePointOverview: ArrayList<SalePointOverview>){
+            this.context = context
+            this.salePointOverview = SalePointOverview
+        }
 
         override fun getCount(): Int {
-            return salePointList.size
+            return salePointOverview.size
         }
 
         override fun getItem(position: Int): Any {
-            return salePointList[position]
+            return salePointOverview[position]
         }
 
         override fun getItemId(position: Int): Long {
@@ -59,19 +96,18 @@ class SalePoint : AppCompatActivity() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-
+            var salePointOverview = salePointOverview[position]
             var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var view = inflator.inflate(R.layout.sale_point_overview, null)
-            val salePoint = getItem(position) as SalePointOverview
 
-            val nameTextView = view.findViewById<TextView>(R.id.sale_point_name)
-            val descriptionTextView = view.findViewById<TextView>(R.id.sale_point_description)
+            val sale_point_name = view.findViewById(R.id.sale_point_name) as TextView
+            val sale_point_cost = view.findViewById(R.id.sale_point_cost) as TextView
+
+            sale_point_name.setText(salePointOverview.sale_point_name)
+            sale_point_cost.text = salePointOverview.sale_point_cost.toString()
 
 
-            nameTextView.text = salePoint.sale_point_name
-            descriptionTextView.text = salePoint.sale_point_description
 
             return view
         }
-    }
 }
