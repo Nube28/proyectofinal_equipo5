@@ -35,6 +35,7 @@
         android:textSize="@dimen/title_size"/>
 
     <TextView
+        android:layout_marginTop="@dimen/margin_three_five"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@string/typo_title"
@@ -44,112 +45,13 @@
         android:textSize="@dimen/title_size" />
 
     <GridLayout
+        android:layout_marginTop="@dimen/margin_top_Graph"
         android:background="@color/fondo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bargraphs"
         android:columnCount="2">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="Local"
-            android:textColor="@color/black"
-            android:textSize="@dimen/medium_text_size"
-            android:layout_marginRight="15dp"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <View android:layout_height="20dp"
-                android:layout_width="250dp"
-                android:id="@+id/Local"/>
-
-            <View android:layout_height="20dp"
-                android:layout_width="250dp"
-                android:id="@+id/LocalR"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_marginTop="@dimen/margin_top_Graph"
-            android:layout_width="wrap_content"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="Mesas"
-            android:textSize="@dimen/medium_text_size"
-            android:textColor="@color/black"
-            android:layout_marginRight="15dp"/>
-
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/margin_top_Graph"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <View android:layout_height="20dp"
-                android:layout_width="250dp"
-                android:id="@+id/Mesas"/>
-            <View android:layout_height="20dp"
-                android:layout_width="250dp"
-                android:id="@+id/MesasR"/>
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="Comida"
-            android:layout_marginTop="@dimen/margin_top_Graph"
-            android:textColor="@color/black"
-            android:textSize="@dimen/medium_text_size"
-            android:layout_marginRight="15dp"/>
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/margin_top_Graph"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <View android:layout_height="20dp"
-                android:layout_width="250dp"
-                android:id="@+id/Comida"/>
-            <View android:layout_height="20dp"
-                android:layout_width="250dp"
-                android:id="@+id/ComidaR"/>
-        </LinearLayout>
-
-
-
-        <TextView
-            android:layout_marginTop="@dimen/margin_top_Graph"
-            android:layout_width="wrap_content"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="Musica"
-            android:textColor="@color/black"
-            android:textSize="@dimen/medium_text_size"
-            android:layout_marginRight="15dp"/>
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/margin_top_Graph"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <View android:layout_height="20dp"
-                android:layout_width="250dp"
-                android:id="@+id/Musica"/>
-            <View android:layout_height="20dp"
-                android:layout_width="250dp"
-                android:id="@+id/MusicaR"/>
-
-        </LinearLayout>
 
         <TextView
             android:layout_marginTop="@dimen/margin_top_Graph"
@@ -163,7 +65,6 @@
             android:layout_marginRight="15dp"/>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/margin_top_Graph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -181,6 +82,7 @@
 
 
     <TextView
+        android:layout_marginTop="@dimen/margin_three_five"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@string/typo_title"
@@ -190,6 +92,7 @@
         android:textSize="@dimen/title_size" />
 
     <LinearLayout
+        android:layout_marginTop="@dimen/margin_top_Graph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/fondo"
@@ -197,8 +100,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="left"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/seventeen"
         android:id="@+id/graph">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -207,6 +111,7 @@
             android:layout_width="137dp"
             android:layout_height="209dp"
             android:layout_marginStart="2dp"
+            android:layout_gravity="right"
             android:src="@drawable/things">
 
         </ImageView>
@@ -217,8 +122,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_low"
         android:background="@drawable/btn_background"
+        android:layout_marginTop="50dp"
         android:padding="10dp"
         android:text="@string/btn_place_list"
         android:textColor="@color/beigeLight" />
