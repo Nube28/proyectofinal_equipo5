@@ -117,6 +117,55 @@
         </ImageView>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_Graph">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Real:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/totalRealText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_Graph">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Estimado:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/totalEstimadoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size" />
+    </LinearLayout>
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sale_point"
         android:layout_width="wrap_content"

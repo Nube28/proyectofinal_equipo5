@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +26,9 @@ class EventStatistics : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_event_statistics)
 
+        val totalEstimadoText = findViewById<TextView>(R.id.totalEstimadoText)
+        val totalRealText = findViewById<TextView>(R.id.totalRealText)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -43,7 +47,10 @@ class EventStatistics : AppCompatActivity() {
             .get()
             .addOnSuccessListener { document ->
                 val totalEstimado = document.getDouble("presupuesto") ?: 0.0
+                totalEstimadoText.text = "$%.2f".format(totalEstimado)
+
                 calcularTotalReal(eventId) { totalReal ->
+                    totalRealText.text = "$%.2f".format(totalReal)
                     actualizarGrafica(totalEstimado, totalReal, totalBar, totalRBar, graph)
                 }
             }
