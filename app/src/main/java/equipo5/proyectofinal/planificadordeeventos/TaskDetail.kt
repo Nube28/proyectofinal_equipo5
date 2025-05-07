@@ -16,6 +16,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * Actividad que muestra los detalles de una tarea, incluyendo su lista de subtareas.
+ * Las subtareas se obtienen dinámicamente desde Firestore.
+ */
 class TaskDetail : AppCompatActivity() {
 
     private var adapter: SubtaskOverviewAdapter? = null
@@ -56,6 +60,9 @@ class TaskDetail : AppCompatActivity() {
         cargarSubtareasDesdeFirestore()
     }
 
+    /**
+     * Carga todas las subtareas asociadas a una tarea específica desde Firestore.
+     */
     private fun cargarSubtareasDesdeFirestore() {
         val eventId = intent.getStringExtra("eventoId") ?: return
         val taskId = intent.getStringExtra("tareaId") ?: return
@@ -87,6 +94,14 @@ class TaskDetail : AppCompatActivity() {
             }
     }
 
+    /**
+     * Adaptador para mostrar elementos de subtareas en un ListView.
+     *
+     * @param context Contexto de la actividad.
+     * @param subtasksOverview Lista de modelos SubtaskOverview.
+     * @param eventId ID del evento al que pertenece la tarea.
+     * @param taskId ID de la tarea a la que pertenecen las subtareas.
+     */
     class SubtaskOverviewAdapter(
         private val context: Context,
         private val subtasksOverview: ArrayList<SubtaskOverview>,

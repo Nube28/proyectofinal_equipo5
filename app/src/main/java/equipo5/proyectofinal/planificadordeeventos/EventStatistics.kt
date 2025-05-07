@@ -1,7 +1,6 @@
 package equipo5.proyectofinal.planificadordeeventos
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +15,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import utilities.CustomCircleDrawable
 import utilities.Graphics
 
+/**
+ * Actividad que muestra estadísticas visuales de un evento, como el presupuesto estimado y el gasto real.
+ *
+ * Recupera información de Firestore, calcula los gastos realizados con base en los proveedores seleccionados
+ * para cada subtarea, y actualiza un gráfico de barras y un gráfico circular para mostrar una comparación
+ * visual entre presupuesto y gasto real.
+ */
 class EventStatistics : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
@@ -59,6 +65,13 @@ class EventStatistics : AppCompatActivity() {
         }
     }
 
+    /**
+     * Calcula el gasto real total de un evento sumando los precios de los proveedores seleccionados
+     * en todas las subtareas.
+     *
+     * @param eventoId ID del evento.
+     * @param callback Función que recibe el total calculado.
+     */
     private fun calcularTotalReal(eventoId: String, callback: (Double) -> Unit) {
         var totalReal = 0.0
 
@@ -117,6 +130,15 @@ class EventStatistics : AppCompatActivity() {
             }
     }
 
+    /**
+     * Actualiza la gráfica de barras y el gráfico circular de presupuesto vs. gasto real.
+     *
+     * @param totalEstimado Presupuesto estimado del evento.
+     * @param totalReal Gasto real calculado del evento.
+     * @param totalBar Vista de barra para presupuesto.
+     * @param totalRBar Vista de barra para gasto real.
+     * @param graph Contenedor donde se dibuja el gráfico circular.
+     */
     private fun actualizarGrafica(
         totalEstimado: Double,
         totalReal: Double,
@@ -147,6 +169,13 @@ class EventStatistics : AppCompatActivity() {
         graph.background = fondo
     }
 
+    /**
+     * Configura el ancho y color de una barra de progreso proporcional a un porcentaje dado.
+     *
+     * @param bar Vista que representa la barra.
+     * @param percentage Porcentaje de la barra respecto al máximo.
+     * @param color Color a aplicar a la barra.
+     */
     private fun setBarWidth(bar: View, percentage: Int, color: Int) {
         val params = bar.layoutParams
         params.width = (300 * percentage / 100)

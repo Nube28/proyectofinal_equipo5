@@ -15,6 +15,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 
+/**
+ * Pantalla principal de autenticación para el usuario.
+ *
+ * Permite al usuario iniciar sesión con su correo y contraseña utilizando Firebase Authentication.
+ * Si el usuario ya tiene una sesión activa, se redirige automáticamente a la pantalla principal del sistema.
+ * También permite redirigir al formulario de registro si no se tiene una cuenta.
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -55,6 +62,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Verifica si hay una sesión de usuario activa al iniciar la actividad.
+     * Si existe, redirige automáticamente a la pantalla de selección de evento.
+     */
     public override fun onStart(){
         super.onStart()
         val currentUser = auth.currentUser
@@ -64,6 +75,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Redirige a la pantalla principal del sistema, pasando el correo electrónico del usuario.
+     *
+     * @param user Usuario autenticado de Firebase.
+     */
     fun goToMain(user: FirebaseUser){
         val intent = Intent(this, ChoseEvent::class.java)
         intent.putExtra("user", user.email)
@@ -71,6 +87,14 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    /**
+     * Intenta iniciar sesión con los datos proporcionados por el usuario.
+     * Si la autenticación es exitosa, redirige a la pantalla principal.
+     * Si falla, muestra un mensaje de error.
+     *
+     * @param email Correo electrónico del usuario.
+     * @param password Contraseña del usuario.
+     */
     fun login(email: String, password: String){
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
