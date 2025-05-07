@@ -20,6 +20,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 
 class EventDetail : AppCompatActivity() {
+
+    private lateinit var listView: ListView
+    private lateinit var txtEventName: TextView
+    private lateinit var txtEventBudget: TextView
+    private var eventId: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,84 +35,15 @@ class EventDetail : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val db = FirebaseFirestore.getInstance()
-        val eventId = intent.getStringExtra("eventId")
-
-        val listView = findViewById<ListView>(R.id.list_view)
-        val txtEventName = findViewById<TextView>(R.id.event_name_detail)
-        val txtEventBudget = findViewById<TextView>(R.id.event_budget_detail)
+        listView = findViewById(R.id.list_view)
+        txtEventName = findViewById(R.id.event_name_detail)
+        txtEventBudget = findViewById(R.id.event_budget_detail)
+        eventId = intent.getStringExtra("eventId")
 
         val tasks = mutableListOf<TaskItem>()
 
         if (eventId != null) {
-            // Cargar los datos del evento
-            db.collection("Eventos").document(eventId)
-                .get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        // Obtener datos del evento
-                        val nombreEvento = document.getString("nombre") ?: "Sin nombre"
-                        val presupuestoEvento = document.get("presupuesto")?.toString() ?: "0"
-
-                        // Actualizar el nombre y presupuesto en la interfaz
-                        txtEventName.text = nombreEvento
-                        txtEventBudget.text = presupuestoEvento
-
-                        // Obtener las tareas del evento
-                        db.collection("Eventos").document(eventId).collection("Tareas")
-                            .get()
-                            .addOnSuccessListener { tareaDocuments ->
-                                val tempTasks = mutableListOf<TaskItem>()
-                                val tareasTotales = tareaDocuments.size()
-                                var tareasCargadas = 0
-
-                                // Recorrer las tareas y cargar las subtareas
-                                for (tareaDoc in tareaDocuments) {
-                                    val tareaId = tareaDoc.id
-                                    val nombreTarea = tareaDoc.getString("nombre") ?: ""
-                                    val presupuestoTarea =
-                                        tareaDoc.get("presupuesto")?.toString() ?: "0"
-                                    val terminadoTarea = tareaDoc.getBoolean("terminado") ?: false
-
-                                    // Cargar las subtareas para esta tarea
-                                    db.collection("Eventos").document(eventId)
-                                        .collection("Tareas").document(tareaId)
-                                        .collection("Subtareas")
-                                        .get()
-                                        .addOnSuccessListener { subtareaDocs ->
-                                            val subtareas = subtareaDocs.map { subDoc ->
-                                                SubTaskItem(
-                                                    id = subDoc.id,
-                                                    name = subDoc.getString("nombre") ?: "",
-                                                    cost = subDoc.get("presupuesto")?.toString()
-                                                        ?: "0",
-                                                    isChecked = subDoc.getBoolean("terminado")
-                                                        ?: false,
-                                                    taskId = tareaId
-                                                )
-                                            }
-
-                                            // Añadir tarea con subtareas
-                                            tempTasks.add(
-                                                TaskItem(
-                                                    id = tareaId,
-                                                    name = nombreTarea,
-                                                    cost = presupuestoTarea,
-                                                    isChecked = terminadoTarea,
-                                                    subTasks = subtareas
-                                                )
-                                            )
-
-                                            tareasCargadas++
-                                            if (tareasCargadas == tareasTotales) {
-                                                val adapter = TaskAdapter(this, tempTasks, eventId)
-                                                listView.adapter = adapter
-                                            }
-                                        }
-                                }
-                            }
-                    }
-                }
+            loadDataEvent()
 
             val btn_event_estadistic: TextView = findViewById(R.id.btn_event_estadistic)
             btn_event_estadistic.setOnClickListener {
@@ -115,8 +52,7 @@ class EventDetail : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            val btn_add_event =
-                findViewById(R.id.btn_add_event) as com.google.android.material.floatingactionbutton.FloatingActionButton
+            val btn_add_event = findViewById(R.id.btn_add_event) as com.google.android.material.floatingactionbutton.FloatingActionButton
 
             btn_add_event.setOnClickListener {
                 val intent: Intent = Intent(this, AddTask::class.java)
@@ -127,22 +63,83 @@ class EventDetail : AppCompatActivity() {
         }
     }
 
-    data class TaskItem(
-        val id: String,
-        val name: String,
-        val cost: String,
-        var isChecked: Boolean = false,
-        var isExpanded: Boolean = false,
-        val subTasks: List<SubTaskItem>
-    )
+    override fun onResume() {
+        super.onResume()
+        eventId?.let {
+            loadDataEvent()
+        }
+    }
 
-    data class SubTaskItem(
-        val id: String,
-        val name: String,
-        val cost: String,
-        var isChecked: Boolean = false,
-        val taskId: String
-    )
+    private fun loadDataEvent(){
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("Eventos").document(eventId.toString())
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    // Obtener datos del evento
+                    val nombreEvento = document.getString("nombre")
+                    val presupuestoEvento = document.get("presupuesto")?.toString()
+
+                    txtEventName.text = nombreEvento
+                    txtEventBudget.text = presupuestoEvento
+
+                    // Obtener las tareas del evento
+                    db.collection("Eventos").document(eventId.toString()).collection("Tareas")
+                        .get()
+                        .addOnSuccessListener { tareaDocuments ->
+                            val tempTasks = mutableListOf<TaskItem>()
+                            val tareasTotales = tareaDocuments.size()
+                            var tareasCargadas = 0
+
+                            // Recorrer las tareas y cargar las subtareas
+                            for (tareaDoc in tareaDocuments) {
+                                val tareaId = tareaDoc.id
+                                val nombreTarea = tareaDoc.getString("nombre") ?: ""
+                                val presupuestoTarea =
+                                    tareaDoc.get("presupuesto")?.toString() ?: "0"
+                                val terminadoTarea = tareaDoc.getBoolean("terminado") ?: false
+
+                                // Cargar las subtareas para esta tarea
+                                db.collection("Eventos").document(eventId.toString())
+                                    .collection("Tareas").document(tareaId)
+                                    .collection("Subtareas")
+                                    .get()
+                                    .addOnSuccessListener { subtareaDocs ->
+                                        val subtareas = subtareaDocs.map { subDoc ->
+                                            SubTaskItem(
+                                                id = subDoc.id,
+                                                name = subDoc.getString("nombre") ?: "",
+                                                cost = subDoc.get("presupuesto")?.toString()
+                                                    ?: "0",
+                                                isChecked = subDoc.getBoolean("terminado")
+                                                    ?: false,
+                                                taskId = tareaId
+                                            )
+                                        }
+
+                                        // Añadir tarea con subtareas
+                                        tempTasks.add(
+                                            TaskItem(
+                                                id = tareaId,
+                                                name = nombreTarea,
+                                                cost = presupuestoTarea,
+                                                isChecked = terminadoTarea,
+                                                subTasks = subtareas
+                                            )
+                                        )
+
+                                        tareasCargadas++
+                                        if (tareasCargadas == tareasTotales) {
+                                            val adapter = TaskAdapter(this, tempTasks, eventId.toString())
+                                            listView.adapter = adapter
+                                        }
+                                    }
+                            }
+                        }
+                }
+            }
+    }
 
     class TaskAdapter(
         private val context: Context,

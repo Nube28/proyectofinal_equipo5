@@ -55,6 +55,10 @@ class ChoseEvent : AppCompatActivity() {
             .whereEqualTo("usuarioId", userId)
             .get()
             .addOnSuccessListener { documents ->
+                if (documents.isEmpty) {
+                    val intent = Intent(this, AddEventActivity::class.java)
+                    startActivity(intent)
+                }
                 for (document in documents) {
                     val nombre = document.getString("nombre") ?: "Sin nombre"
                     val presupuesto = document.get("presupuesto")?.toString() ?: "0"
