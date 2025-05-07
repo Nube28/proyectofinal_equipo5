@@ -3,6 +3,7 @@ package equipo5.proyectofinal.planificadordeeventos
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
@@ -78,9 +79,12 @@ class EventStatistics : AppCompatActivity() {
         setBarWidth(musicaRBar, 60, Blue)
         setBarWidth(totalRBar, 120, Blue)
 
+        val eventId = intent.getStringExtra("eventoId")
+
         val btn_sale_point = findViewById(R.id.btn_sale_point) as Button
         btn_sale_point.setOnClickListener{
             val intent: Intent = Intent(this, SalePoint::class.java)
+            intent.putExtra("eventoId", eventId)
             startActivity(intent)
         }
     }

@@ -41,23 +41,16 @@ class SelectSupplier : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        val currentUser = auth.currentUser
-        if (currentUser == null) {
-            Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_LONG).show()
-            finish()
-            return
-        }
+        val eventoId = intent.getStringExtra("eventoId")
+        val tareaId = intent.getStringExtra("tareaId")
+        val subtareaId = intent.getStringExtra("subtareaId")
 
-        val uid = currentUser.uid // ID del usuario autenticado
-
-        // Configura el ListView
         val listView = findViewById<ListView>(R.id.list_view)
         adapter = SupplierOverviewAdapter(this, supplierOverview)
         listView.adapter = adapter
 
-        cargarProveedores(uid) // Cargar proveedores desde Firestore
+        cargarProveedoresDesdeSubtarea(eventoId.toString(), tareaId.toString(), subtareaId.toString())
 
-        // Botón para ir a agregar proveedor
         val btn_register_supplier: Button = findViewById(R.id.btn_register_supplier)
         btn_register_supplier.setOnClickListener {
             startActivity(Intent(this, AddSupplier::class.java))
@@ -66,21 +59,28 @@ class SelectSupplier : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        auth.currentUser?.uid?.let { cargarProveedores(it) } // Recarga la lista al volver
+
     }
 
-    // Cargar proveedores de la subcolección del usuario
-    private fun cargarProveedores(uid: String) {
-        db.collection("users").document(uid).collection("proveedores")
-            .get()
+    private fun cargarProveedoresDesdeSubtarea(eventoId: String, tareaId: String, subtareaId: String) {
+        val subTareaProveedorRef = db.collection("Eventos")
+            .document(eventoId)
+            .collection("Tareas")
+            .document(tareaId)
+            .collection("Subtareas")
+            .document(subtareaId)
+            .collection("Proveedor")
+
+        subTareaProveedorRef.get()
             .addOnSuccessListener { result ->
                 supplierOverview.clear()
-                adapter?.notifyDataSetChanged()
                 for (document in result) {
-                    val nombre = document.getString("nombre") ?: ""
+                    val nombre = document.getString("nombre") ?: "Sin nombre"
                     val precio = document.getDouble("precio") ?: 0.0
+                    val seleccionado = document.getBoolean("seleccionado") ?: false
                     val id = document.id
-                    supplierOverview.add(SupplierOverview(nombre, false, id, precio))
+
+                    supplierOverview.add(SupplierOverview(nombre, seleccionado, id, precio))
                 }
                 adapter?.notifyDataSetChanged()
             }
@@ -89,7 +89,6 @@ class SelectSupplier : AppCompatActivity() {
             }
     }
 
-    // Adaptador para mostrar la lista de proveedores
     inner class SupplierOverviewAdapter(private val context: Context, private val supplierList: ArrayList<SupplierOverview>) : BaseAdapter() {
 
         override fun getCount(): Int {
@@ -111,9 +110,37 @@ class SelectSupplier : AppCompatActivity() {
             textView.text = supplier.Supplier_name
             checkBox.isChecked = supplier.isSelected
 
-            // Maneja clic en el checkbox
             checkBox.setOnClickListener {
-                supplierList[position].isSelected = checkBox.isChecked
+                val eventoId = intent.getStringExtra("eventoId")
+                val tareaId = intent.getStringExtra("tareaId")
+                val subtareaId = intent.getStringExtra("subtareaId")
+
+                val proveedorSeleccionado = supplierList[position]
+                val subTareaProveedorRef = db.collection("Eventos")
+                    .document(eventoId.toString())
+                    .collection("Tareas")
+                    .document(tareaId.toString())
+                    .collection("Subtareas")
+                    .document(subtareaId.toString())
+                    .collection("Proveedor")
+
+                for (proveedor in supplierList) {
+                    val updateSeleccionado = proveedor.id == proveedorSeleccionado.id
+                    db.collection("Eventos")
+                        .document(eventoId.toString())
+                        .collection("Tareas")
+                        .document(tareaId.toString())
+                        .collection("Subtareas")
+                        .document(subtareaId.toString())
+                        .collection("Proveedor")
+                        .document(proveedor.id)
+                        .update("seleccionado", updateSeleccionado)
+                }
+
+                for (i in supplierList.indices) {
+                    supplierList[i].isSelected = supplierList[i].id == proveedorSeleccionado.id
+                }
+                finish()
             }
 
             return view

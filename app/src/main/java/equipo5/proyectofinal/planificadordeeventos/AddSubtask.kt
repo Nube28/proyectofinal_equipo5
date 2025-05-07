@@ -57,7 +57,8 @@ class AddSubtask : AppCompatActivity() {
                 "nombre" to nombre,
                 "descripcion" to descripcion,
                 "presupuesto" to presupuesto,
-                "fecha" to Timestamp.now()
+                "fecha" to Timestamp.now(),
+                "terminado" to false
             )
 
 

@@ -69,7 +69,8 @@ class AddSupplier : AppCompatActivity() {
             val proveedor = hashMapOf(
                 "nombre" to nombreProveedor,
                 "precio" to precioProducto,
-                "fecha" to Timestamp.now()
+                "fecha" to Timestamp.now(),
+                "seleccionado" to false
             )
 
             val eventoId = intent.getStringExtra("eventoId")

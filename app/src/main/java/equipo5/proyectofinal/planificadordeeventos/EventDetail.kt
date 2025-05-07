@@ -111,6 +111,7 @@ class EventDetail : AppCompatActivity() {
             val btn_event_estadistic: TextView = findViewById(R.id.btn_event_estadistic)
             btn_event_estadistic.setOnClickListener {
                 val intent: Intent = Intent(this, EventStatistics::class.java)
+                intent.putExtra("eventoId", eventId)
                 startActivity(intent)
             }
 
@@ -209,6 +210,12 @@ class EventDetail : AppCompatActivity() {
                         .collection("Tareas").document(subTask.taskId)
                         .collection("Subtareas").document(subTask.id)
                         .update("terminado", isChecked)
+
+                    var intent: Intent = Intent(context, SelectSupplier::class.java)
+                    intent.putExtra("eventoId",eventId)
+                    intent.putExtra("tareaId",subTask.taskId)
+                    intent.putExtra("subtareaId",subTask.id)
+                    context.startActivity(intent)
                 }
 
                 subTaskContainer.addView(subTaskView)

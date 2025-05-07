@@ -38,52 +38,81 @@ class SalePoint : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.list_view)
 
+        val eventId = intent.getStringExtra("eventoId")
 
         adapter = SalePointOverviewAdapter(this, salePointOverview)
         listView.adapter = adapter
 
-        CrearPuntosDeVenta()
-
-    }
-    //no jala AUN
-    fun CrearPuntosDeVenta(){
-
-        val eventId = intent.getStringExtra("eventoId") ?: "2mVPn3UCCk8iqMpxXJsE"
-        val taskId = intent.getStringExtra("tareaId") ?: "9PGya03SZ5yBNMD2bE5I"
-        val subtaskId = intent.getStringExtra("subtareaId") ?: "ZPv7Bz9LIvbKS0HpWFxF"
-
-
-
-
-        db.collection("Eventos")
-            .document(eventId)
-            .collection("Tareas")
-            .document(taskId)
-            .collection("Subtareas")
-            .document(subtaskId)
-            .collection("Proveedor").get().addOnSuccessListener { documents ->
+        if (eventId != null) {
+            obtenerProveedoresSeleccionados(eventId = eventId) { lista ->
                 salePointOverview.clear()
-                for (document in documents) {
-
-                    val nombre = document.getString("nombre") ?: "Sin nombre"
-                    val precio = document.getDouble("precio")?.toInt() ?: 0
-
-                    val proveedor = SalePointOverview(
-                        sale_point_name = nombre,
-                        sale_point_cost = precio,
-                        subtaskId = document.id
-
-                    )
-                    salePointOverview.add(proveedor)
-                }
+                salePointOverview.addAll(lista)
                 adapter?.notifyDataSetChanged()
             }
-            .addOnFailureListener { e ->
-                Log.e("ERROR EN LOS PROOVEDORES", "OCURRIÓ UN ERROR")
-                e.printStackTrace()
+        }
+
+    }
+
+    fun obtenerProveedoresSeleccionados(eventId: String, onResult: (List<SalePointOverview>) -> Unit) {
+        val proveedoresSeleccionados = mutableListOf<SalePointOverview>()
+
+        db.collection("Eventos").document(eventId)
+            .collection("Tareas")
+            .get()
+            .addOnSuccessListener { tareas ->
+                var tareasRestantes = tareas.size()
+                if (tareasRestantes == 0) onResult(proveedoresSeleccionados)
+
+                for (tarea in tareas) {
+                    tarea.reference.collection("Subtareas")
+                        .get()
+                        .addOnSuccessListener { subtareas ->
+                            var subtareasRestantes = subtareas.size()
+                            if (subtareasRestantes == 0 && --tareasRestantes == 0) {
+                                onResult(proveedoresSeleccionados)
+                            }
+
+                            for (subtarea in subtareas) {
+                                subtarea.reference.collection("Proveedor")
+                                    .whereEqualTo("seleccionado", true)
+                                    .get()
+                                    .addOnSuccessListener { proveedores ->
+                                        for (proveedor in proveedores) {
+                                            val nombre = proveedor.getString("nombre") ?: "Sin nombre"
+                                            val precio = proveedor.getDouble("precio")?.toInt() ?: 0
+
+                                            val sp = SalePointOverview(
+                                                sale_point_name = nombre,
+                                                sale_point_cost = precio,
+                                                subtaskId = subtarea.id
+                                            )
+                                            proveedoresSeleccionados.add(sp)
+                                        }
+
+                                        if (--subtareasRestantes == 0 && --tareasRestantes == 0) {
+                                            onResult(proveedoresSeleccionados)
+                                        }
+                                    }
+                                    .addOnFailureListener {
+                                        if (--subtareasRestantes == 0 && --tareasRestantes == 0) {
+                                            onResult(proveedoresSeleccionados)
+                                        }
+                                    }
+                            }
+                        }
+                        .addOnFailureListener {
+                            if (--tareasRestantes == 0) {
+                                onResult(proveedoresSeleccionados)
+                            }
+                        }
+                }
+            }
+            .addOnFailureListener {
+                onResult(emptyList())
             }
     }
 }
+
 
 
 class SalePointOverviewAdapter : BaseAdapter {

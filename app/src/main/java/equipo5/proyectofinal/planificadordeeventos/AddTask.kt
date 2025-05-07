@@ -49,7 +49,8 @@ class AddTask : AppCompatActivity() {
                 "nombre" to nombreTarea,
                 "descripcion" to descripcionTarea,
                 "presupuesto" to presupuestoTarea,
-                "fecha" to Timestamp.now()
+                "fecha" to Timestamp.now(),
+                "terminado" to false
             )
 
             db.collection("Eventos").document(eventoId.toString())
