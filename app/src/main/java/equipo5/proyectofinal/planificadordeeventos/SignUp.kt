@@ -15,6 +15,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * Pantalla de registro de nuevos usuarios.
+ * Permite a los usuarios crear una cuenta con nombre, correo y contraseña.
+ * Después del registro, guarda el usuario en Firestore y redirige a la pantalla principal.
+ */
 class SignUp : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -54,6 +59,13 @@ class SignUp : AppCompatActivity() {
         }
     }
 
+    /**
+     * Registra un nuevo usuario en Firebase Authentication y lo guarda en la colección `Usuarios` de Firestore.
+     *
+     * @param name Nombre del usuario
+     * @param email Correo electrónico
+     * @param password Contraseña
+     */
     fun signUp(name: String, email: String, password: String){
         val db = FirebaseFirestore.getInstance()
 

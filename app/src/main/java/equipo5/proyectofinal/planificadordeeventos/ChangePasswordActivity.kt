@@ -1,19 +1,16 @@
 package equipo5.proyectofinal.planificadordeeventos
 
-import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Actividad que permite al usuario cambiar su contraseña.
+ */
 class ChangePasswordActivity : AppCompatActivity() {
 
     private var email = ""
@@ -43,6 +40,9 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Funcion que envia un email para cambiar la contraseña del usuario.
+     */
     private fun resetPassword(){
         auth.setLanguageCode("it")
         auth.setLanguageCode("it")

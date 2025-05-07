@@ -1,26 +1,23 @@
 package equipo5.proyectofinal.planificadordeeventos
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import java.io.Console
 
+/**
+ * Actividad que muestra un resumen de los proveedores seleccionados para las subtareas de un evento.
+ * Recupera los datos desde Firestore y los presenta en una lista.
+ */
 class SalePoint : AppCompatActivity() {
     var adapter: SalePointOverviewAdapter? = null
     var salePointOverview = ArrayList<SalePointOverview>()
@@ -53,6 +50,12 @@ class SalePoint : AppCompatActivity() {
 
     }
 
+    /**
+     * Obtiene de Firestore todos los proveedores que han sido seleccionados en las subtareas de un evento.
+     *
+     * @param eventId ID del evento.
+     * @param onResult Callback con la lista de objetos [SalePointOverview] obtenidos.
+     */
     fun obtenerProveedoresSeleccionados(eventId: String, onResult: (List<SalePointOverview>) -> Unit) {
         val proveedoresSeleccionados = mutableListOf<SalePointOverview>()
 
@@ -113,8 +116,12 @@ class SalePoint : AppCompatActivity() {
     }
 }
 
-
-
+/**
+ * Adaptador para mostrar objetos [SalePointOverview] en una lista personalizada.
+ *
+ * @param context Contexto de la actividad o fragmento.
+ * @param salePointOverview Lista de puntos de venta seleccionados.
+ */
 class SalePointOverviewAdapter : BaseAdapter {
     var salePointOverview = ArrayList<SalePointOverview>()
     var context: Context? = null

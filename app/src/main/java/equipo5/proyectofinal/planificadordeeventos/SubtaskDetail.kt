@@ -11,6 +11,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 
+
+/**
+ * Actividad que muestra los detalles de una subtarea.
+ * Se encarga de mostrar nombre, descripción y presupuesto, además de permitir registrar proveedores.
+ */
 class SubtaskDetail : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
@@ -51,6 +56,13 @@ class SubtaskDetail : AppCompatActivity() {
         }
     }
 
+    /**
+     * Busca y reemplaza un TextView de ejemplo con la descripción y presupuesto reales.
+     *
+     * @param view Vista raíz desde donde se comienza a buscar.
+     * @param descripcion Descripción de la subtarea.
+     * @param presupuesto Presupuesto asignado.
+     */
     private fun findAndReplaceLoremIpsum(view: View, descripcion: String, presupuesto: Int) {
         if (view is TextView) {
             val loremText = getString(R.string.eg_text_lorem)
@@ -67,6 +79,14 @@ class SubtaskDetail : AppCompatActivity() {
         }
     }
 
+    /**
+     * Guarda la subtarea en la colección "subtasks" de Firestore.
+     * Nota: este guardado es genérico y no está vinculado directamente a un evento/tarea/subtarea.
+     *
+     * @param nombre Nombre de la subtarea.
+     * @param descripcion Descripción de la subtarea.
+     * @param presupuesto Presupuesto asignado.
+     */
     private fun saveSubtaskToFirestore(nombre: String, descripcion: String, presupuesto: Int) {
         val subtaskData = hashMapOf(
             "nombre" to nombre,

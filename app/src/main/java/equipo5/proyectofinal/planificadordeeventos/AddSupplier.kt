@@ -12,6 +12,9 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * Actividad que permite al usuario agregar un nuevo proveedor.
+ */
 class AddSupplier : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore

@@ -19,6 +19,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * `EventDetail` muestra los detalles de un evento seleccionado, incluyendo:
+ * - Información general del evento (nombre, presupuesto)
+ * - Lista de tareas con subtareas
+ * - Posibilidad de marcar tareas y subtareas como terminadas
+ *
+ * Además permite al usuario:
+ * - Agregar nuevas tareas
+ * - Visualizar estadísticas del evento
+ * - Seleccionar proveedores al completar subtareas
+ */
 class EventDetail : AppCompatActivity() {
 
     private lateinit var listView: ListView
@@ -53,7 +64,6 @@ class EventDetail : AppCompatActivity() {
             }
 
             val btn_add_event = findViewById(R.id.btn_add_event) as com.google.android.material.floatingactionbutton.FloatingActionButton
-
             btn_add_event.setOnClickListener {
                 val intent: Intent = Intent(this, AddTask::class.java)
                 intent.putExtra("eventoId", eventId)
@@ -70,6 +80,9 @@ class EventDetail : AppCompatActivity() {
         }
     }
 
+    /**
+     * Carga los datos del evento y sus tareas y subtareas desde Firestore.
+     */
     private fun loadDataEvent(){
         val db = FirebaseFirestore.getInstance()
 
@@ -77,14 +90,12 @@ class EventDetail : AppCompatActivity() {
             .get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    // Obtener datos del evento
                     val nombreEvento = document.getString("nombre")
                     val presupuestoEvento = document.get("presupuesto")?.toString()
 
                     txtEventName.text = nombreEvento
                     txtEventBudget.text = presupuestoEvento
 
-                    // Obtener las tareas del evento
                     db.collection("Eventos").document(eventId.toString()).collection("Tareas")
                         .get()
                         .addOnSuccessListener { tareaDocuments ->
@@ -92,7 +103,6 @@ class EventDetail : AppCompatActivity() {
                             val tareasTotales = tareaDocuments.size()
                             var tareasCargadas = 0
 
-                            // Recorrer las tareas y cargar las subtareas
                             for (tareaDoc in tareaDocuments) {
                                 val tareaId = tareaDoc.id
                                 val nombreTarea = tareaDoc.getString("nombre") ?: ""
@@ -100,7 +110,6 @@ class EventDetail : AppCompatActivity() {
                                     tareaDoc.get("presupuesto")?.toString() ?: "0"
                                 val terminadoTarea = tareaDoc.getBoolean("terminado") ?: false
 
-                                // Cargar las subtareas para esta tarea
                                 db.collection("Eventos").document(eventId.toString())
                                     .collection("Tareas").document(tareaId)
                                     .collection("Subtareas")
@@ -118,7 +127,6 @@ class EventDetail : AppCompatActivity() {
                                             )
                                         }
 
-                                        // Añadir tarea con subtareas
                                         tempTasks.add(
                                             TaskItem(
                                                 id = tareaId,
@@ -141,6 +149,14 @@ class EventDetail : AppCompatActivity() {
             }
     }
 
+
+    /**
+     * Adaptador para representar la lista de tareas y sus subtareas.
+     *
+     * @property context El contexto de la actividad
+     * @property taskList Lista de tareas con sus subtareas
+     * @property eventId ID del evento al que pertenecen las tareas
+     */
     class TaskAdapter(
         private val context: Context,
         private val taskList: MutableList<TaskItem>,

@@ -19,6 +19,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * Actividad que permite visualizar y seleccionar proveedores asociados a una subtarea específica
+ * dentro de un evento y tarea determinados.
+ *
+ * El usuario puede registrar un nuevo proveedor o marcar uno existente como "seleccionado".
+ */
 class SelectSupplier : AppCompatActivity() {
 
     var adapter: SupplierOverviewAdapter? = null
@@ -56,6 +62,9 @@ class SelectSupplier : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la lista de proveedores desde una subtarea específica y actualiza la vista.
+     */
     private fun cargarProveedoresDesdeSubtarea(eventoId: String, tareaId: String, subtareaId: String) {
         val subTareaProveedorRef = db.collection("Eventos")
             .document(eventoId)
@@ -83,6 +92,10 @@ class SelectSupplier : AppCompatActivity() {
             }
     }
 
+    /**
+     * Adaptador para mostrar la lista de proveedores en la interfaz.
+     * Permite seleccionar o deseleccionar un proveedor y guarda el cambio en Firestore.
+     */
     inner class SupplierOverviewAdapter(private val context: Context, private val supplierList: ArrayList<SupplierOverview>) : BaseAdapter() {
 
         override fun getCount(): Int = supplierList.size

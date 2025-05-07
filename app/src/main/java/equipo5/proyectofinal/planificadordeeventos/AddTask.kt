@@ -1,7 +1,6 @@
 package equipo5.proyectofinal.planificadordeeventos
 
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.Timestamp
 
+/**
+ * Actividad que permite al usuario agregar una nueva tarea.
+ */
 class AddTask : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore

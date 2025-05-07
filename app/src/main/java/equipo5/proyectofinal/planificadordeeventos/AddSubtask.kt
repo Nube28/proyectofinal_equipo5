@@ -11,6 +11,9 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * Actividad que permite al usuario agregar una nueva subtarea.
+ */
 class AddSubtask : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
@@ -20,7 +23,6 @@ class AddSubtask : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_subtask)
 
-        // Ajuste de ventanas
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -41,7 +43,6 @@ class AddSubtask : AppCompatActivity() {
             val presupuestoTexto = etPresupuesto.text.toString().trim()
             val presupuesto = presupuestoTexto.toIntOrNull()
 
-            // Validación
             if (nombre.isEmpty() || descripcion.isEmpty() || presupuesto == null) {
                 Toast.makeText(this, "Todos los campos son obligatorios y el presupuesto debe ser válido", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

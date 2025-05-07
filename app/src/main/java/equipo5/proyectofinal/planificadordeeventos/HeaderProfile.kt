@@ -8,15 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
- * A simple [Fragment] subclass.
- * Use the [HeaderProfile.newInstance] factory method to
- * create an instance of this fragment.
+ * Un subclase [Fragment] simple.
+ * Representa el header con un boton que te lleva al perfil del usuario
  */
 class HeaderProfile : Fragment() {
 

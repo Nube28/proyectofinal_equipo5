@@ -17,6 +17,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * Actividad que permite al usuario visualizar una lista de eventos disponibles
+ * y seleccionar uno para ver su detalle o crear uno nuevo.
+ */
 class ChoseEvent : AppCompatActivity() {
 
     var adapter: EventOverviewAdapter? = null
@@ -48,6 +52,9 @@ class ChoseEvent : AppCompatActivity() {
 
     }
 
+    /**
+     * Recupera los eventos del usuario actual desde la base de datos y los carga en la lista.
+     */
     fun cargarEventos() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
 
@@ -55,10 +62,12 @@ class ChoseEvent : AppCompatActivity() {
             .whereEqualTo("usuarioId", userId)
             .get()
             .addOnSuccessListener { documents ->
+                //si no hay eventos mandalo a add event
                 if (documents.isEmpty) {
                     val intent = Intent(this, AddEventActivity::class.java)
                     startActivity(intent)
                 }
+                //recupera todos los eventos, los guarda en la lista eventsOverview y luego el adaptador actualiza
                 for (document in documents) {
                     val nombre = document.getString("nombre") ?: "Sin nombre"
                     val presupuesto = document.get("presupuesto")?.toString() ?: "0"
@@ -91,6 +100,12 @@ class ChoseEvent : AppCompatActivity() {
 
 }
 
+/**
+ * Adaptador personalizado para mostrar la lista de eventos.
+ *
+ * @property context Contexto de la aplicación.
+ * @property eventsOverview Lista de objetos [EventOverview] a mostrar.
+ */
 class EventOverviewAdapter: BaseAdapter {
     var eventsOverview = ArrayList<EventOverview>()
     var context: Context? = null
