@@ -140,6 +140,7 @@ class SelectSupplier : AppCompatActivity() {
                 for (i in supplierList.indices) {
                     supplierList[i].isSelected = supplierList[i].id == proveedorSeleccionado.id
                 }
+                //aaqui
                 finish()
             }
 
