@@ -31,7 +31,6 @@ class SelectSupplier : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_select_supplier)
 
-        // Ajuste para la vista con barras del sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -55,11 +54,6 @@ class SelectSupplier : AppCompatActivity() {
         btn_register_supplier.setOnClickListener {
             startActivity(Intent(this, AddSupplier::class.java))
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
     }
 
     private fun cargarProveedoresDesdeSubtarea(eventoId: String, tareaId: String, subtareaId: String) {
@@ -91,9 +85,7 @@ class SelectSupplier : AppCompatActivity() {
 
     inner class SupplierOverviewAdapter(private val context: Context, private val supplierList: ArrayList<SupplierOverview>) : BaseAdapter() {
 
-        override fun getCount(): Int {
-            return if (supplierList.isEmpty()) 0 else supplierList.size
-        }
+        override fun getCount(): Int = supplierList.size
 
         override fun getItem(position: Int): Any = supplierList[position]
 
@@ -105,9 +97,13 @@ class SelectSupplier : AppCompatActivity() {
             val supplier = getItem(position) as SupplierOverview
 
             val checkBox = view.findViewById<CheckBox>(R.id.check_supplier)
-            val textView = view.findViewById<TextView>(R.id.text_name_supplier)
+            val nombre = view.findViewById<TextView>(R.id.text_name_supplier)
+            val precio = view.findViewById<TextView>(R.id.supplier_cost)
 
-            textView.text = supplier.Supplier_name
+
+
+            nombre.text = supplier.Supplier_name
+            precio.text = supplier.price.toString()
             checkBox.isChecked = supplier.isSelected
 
             checkBox.setOnClickListener {
@@ -116,6 +112,8 @@ class SelectSupplier : AppCompatActivity() {
                 val subtareaId = intent.getStringExtra("subtareaId")
 
                 val proveedorSeleccionado = supplierList[position]
+                val nuevoEstado = !proveedorSeleccionado.isSelected
+
                 val subTareaProveedorRef = db.collection("Eventos")
                     .document(eventoId.toString())
                     .collection("Tareas")
@@ -124,24 +122,16 @@ class SelectSupplier : AppCompatActivity() {
                     .document(subtareaId.toString())
                     .collection("Proveedor")
 
-                for (proveedor in supplierList) {
-                    val updateSeleccionado = proveedor.id == proveedorSeleccionado.id
-                    db.collection("Eventos")
-                        .document(eventoId.toString())
-                        .collection("Tareas")
-                        .document(tareaId.toString())
-                        .collection("Subtareas")
-                        .document(subtareaId.toString())
-                        .collection("Proveedor")
-                        .document(proveedor.id)
-                        .update("seleccionado", updateSeleccionado)
-                }
-
-                for (i in supplierList.indices) {
-                    supplierList[i].isSelected = supplierList[i].id == proveedorSeleccionado.id
-                }
-                //aaqui
-                finish()
+                subTareaProveedorRef
+                    .document(proveedorSeleccionado.id)
+                    .update("seleccionado", nuevoEstado)
+                    .addOnSuccessListener {
+                        proveedorSeleccionado.isSelected = nuevoEstado
+                        notifyDataSetChanged()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(context, "Error al actualizar proveedor", Toast.LENGTH_SHORT).show()
+                    }
             }
 
             return view
