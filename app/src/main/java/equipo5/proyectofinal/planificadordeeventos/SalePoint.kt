@@ -3,6 +3,7 @@ package equipo5.proyectofinal.planificadordeeventos
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.Console
 
 class SalePoint : AppCompatActivity() {
     var adapter: SalePointOverviewAdapter? = null
@@ -28,7 +30,7 @@ class SalePoint : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_sale_point)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat. setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -39,17 +41,26 @@ class SalePoint : AppCompatActivity() {
 
         adapter = SalePointOverviewAdapter(this, salePointOverview)
         listView.adapter = adapter
+
         CrearPuntosDeVenta()
 
     }
-             //no jala AUN
+    //no jala AUN
     fun CrearPuntosDeVenta(){
 
-        val eventId = intent.getStringExtra("eventoId") ?: return
-        val taskId = intent.getStringExtra("tareaId") ?: return
-        val subtaskId = intent.getStringExtra("subtareaId") ?: return
+        val eventId = intent.getStringExtra("eventoId") ?: "2mVPn3UCCk8iqMpxXJsE"
+        val taskId = intent.getStringExtra("tareaId") ?: "9PGya03SZ5yBNMD2bE5I"
+        val subtaskId = intent.getStringExtra("subtareaId") ?: "ZPv7Bz9LIvbKS0HpWFxF"
 
-        db.collection("Eventos").document(eventId).collection("Tareas").document(taskId).collection("Subtareas").document(subtaskId)
+
+
+
+        db.collection("Eventos")
+            .document(eventId)
+            .collection("Tareas")
+            .document(taskId)
+            .collection("Subtareas")
+            .document(subtaskId)
             .collection("Proveedor").get().addOnSuccessListener { documents ->
                 salePointOverview.clear()
                 for (document in documents) {
@@ -68,46 +79,47 @@ class SalePoint : AppCompatActivity() {
                 adapter?.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
+                Log.e("ERROR EN LOS PROOVEDORES", "OCURRIÓ UN ERROR")
                 e.printStackTrace()
             }
     }
+}
+
+
+class SalePointOverviewAdapter : BaseAdapter {
+    var salePointOverview = ArrayList<SalePointOverview>()
+    var context: Context? = null
+
+    constructor(context: Context, SalePointOverview: ArrayList<SalePointOverview>){
+        this.context = context
+        this.salePointOverview = SalePointOverview
     }
 
+    override fun getCount(): Int {
+        return salePointOverview.size
+    }
 
-    class SalePointOverviewAdapter : BaseAdapter {
-        var salePointOverview = ArrayList<SalePointOverview>()
-        var context: Context? = null
+    override fun getItem(position: Int): Any {
+        return salePointOverview[position]
+    }
 
-        constructor(context: Context, SalePointOverview: ArrayList<SalePointOverview>){
-            this.context = context
-            this.salePointOverview = SalePointOverview
-        }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 
-        override fun getCount(): Int {
-            return salePointOverview.size
-        }
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        var salePointOverview = salePointOverview[position]
+        var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        var view = inflator.inflate(R.layout.sale_point_overview, null)
 
-        override fun getItem(position: Int): Any {
-            return salePointOverview[position]
-        }
+        val sale_point_name = view.findViewById(R.id.sale_point_name) as TextView
+        val sale_point_cost = view.findViewById(R.id.sale_point_cost) as TextView
 
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            var salePointOverview = salePointOverview[position]
-            var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            var view = inflator.inflate(R.layout.sale_point_overview, null)
-
-            val sale_point_name = view.findViewById(R.id.sale_point_name) as TextView
-            val sale_point_cost = view.findViewById(R.id.sale_point_cost) as TextView
-
-            sale_point_name.setText(salePointOverview.sale_point_name)
-            sale_point_cost.text = salePointOverview.sale_point_cost.toString()
+        sale_point_name.setText(salePointOverview.sale_point_name)
+        sale_point_cost.text = salePointOverview.sale_point_cost.toString()
 
 
 
-            return view
-        }
+        return view
+    }
 }
