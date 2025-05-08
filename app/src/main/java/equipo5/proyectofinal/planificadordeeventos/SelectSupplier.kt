@@ -12,6 +12,8 @@ import android.widget.CheckBox
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -31,6 +33,9 @@ class SelectSupplier : AppCompatActivity() {
     var supplierOverview = ArrayList<SupplierOverview>()
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+
+
+    private lateinit var addSupplierLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,9 +61,18 @@ class SelectSupplier : AppCompatActivity() {
 
         cargarProveedoresDesdeSubtarea(eventoId.toString(), tareaId.toString(), subtareaId.toString())
 
+
+        addSupplierLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                cargarProveedoresDesdeSubtarea(eventoId.toString(), tareaId.toString(), subtareaId.toString())
+            }
+        }
+
         val btn_register_supplier: Button = findViewById(R.id.btn_register_supplier)
         btn_register_supplier.setOnClickListener {
-            startActivity(Intent(this, AddSupplier::class.java))
+            // Lanzar la actividad para agregar un nuevo proveedor
+            val intent = Intent(this, AddSupplier::class.java)
+            addSupplierLauncher.launch(intent)
         }
     }
 
@@ -112,8 +126,6 @@ class SelectSupplier : AppCompatActivity() {
             val checkBox = view.findViewById<CheckBox>(R.id.check_supplier)
             val nombre = view.findViewById<TextView>(R.id.text_name_supplier)
             val precio = view.findViewById<TextView>(R.id.supplier_cost)
-
-
 
             nombre.text = supplier.Supplier_name
             precio.text = supplier.price.toString()
