@@ -54,7 +54,10 @@
         android:textSize="@dimen/title_size_max"
         android:textColor="@color/black"
         android:gravity="center"
-        android:layout_marginTop="@dimen/margin_normal" />
+        android:layout_marginTop="@dimen/eight"
+        android:layout_marginBottom="@dimen/margin_normal" />
+
+
 
 
     <LinearLayout
