@@ -74,6 +74,7 @@
                 android:layout_marginStart="10dp"/>
 
             <TextView
+                android:id="@+id/task_description_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/eg_text_lorem"
@@ -108,7 +109,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/lb_comparative_example"
+                    android:text="@string/proveedor"
                     android:textColor="@color/black"
                     android:textAlignment="textStart"
                     android:fontFamily="@string/typo_normal_text"
@@ -122,60 +123,9 @@
                     android:layout_marginBottom="@dimen/eight"/>
 
                 <TableLayout
+                    android:id="@+id/table_suppliers"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
-
-                    <TableRow>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@string/typo_normal_text"
-                            android:text="Don Carlos"
-                            android:textColor="@color/black"
-                            android:padding="4dp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@string/typo_normal_text"
-                            android:text="1000"
-                            android:textColor="@color/black"
-                            android:padding="4dp" />
-                    </TableRow>
-
-                    <TableRow>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Doña Ana"
-                            android:textColor="@color/black"
-                            android:fontFamily="@string/typo_normal_text"
-                            android:padding="4dp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@string/typo_normal_text"
-                            android:text="102"
-                            android:textColor="@color/black"
-                            android:padding="4dp" />
-                    </TableRow>
-
-                    <TableRow>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Sillas Express"
-                            android:textColor="@color/black"
-                            android:fontFamily="@string/typo_normal_text"
-                            android:padding="4dp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@string/typo_normal_text"
-                            android:text="1800"
-                            android:textColor="@color/black"
-                            android:padding="4dp" />
-                    </TableRow>
-
                 </TableLayout>
             </LinearLayout>
 

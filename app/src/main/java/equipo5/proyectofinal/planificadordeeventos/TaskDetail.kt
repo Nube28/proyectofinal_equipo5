@@ -155,13 +155,7 @@ class TaskDetail : AppCompatActivity() {
             tvSubtaskBudget.text = "${subtaskOverview.tv_subtask_budget} Pesos"
 
             view.setOnClickListener {
-                //OLA KAT ESTO NO DEBERIA DE MANDAR LOS PIMEROS 3 PUTEXTRA, debe de jalarlos de la base de datos en la siguiente pagina salu2
                 val intent = Intent(context, SubtaskDetail::class.java).apply {
-                    putExtra("nombre", subtaskOverview.tv_subtask_name)
-                    putExtra("descripcion", subtaskOverview.tv_subtask_description)
-                    putExtra("presupuesto", subtaskOverview.tv_subtask_budget)
-
-                    //ESTOS NO LOS TOQUES KAT
                     putExtra("eventoId", eventId)
                     putExtra("tareaId", taskId)
                     putExtra("subtareaId", subtaskOverview.subtaskId)

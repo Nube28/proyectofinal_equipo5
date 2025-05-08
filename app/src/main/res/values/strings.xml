@@ -71,6 +71,7 @@
 
 
     <!-- este es el de las tareas y subtareas -->
+    <string name="proveedor">Proveedores</string>
     <string name="hint_task_description">Descripción</string>
     <string name="hint_task_budget">Presupuesto</string>
     <string name="lb_newtask_budget">Presupuesto:</string>

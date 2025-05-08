@@ -2,9 +2,10 @@ package equipo5.proyectofinal.planificadordeeventos
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
@@ -32,20 +33,14 @@ class SubtaskDetail : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
 
-        val nombre = intent.getStringExtra("nombre") ?: "Sin nombre"
-        val descripcion = intent.getStringExtra("descripcion") ?: "Sin descripción"
-        val presupuesto = intent.getIntExtra("presupuesto", 0)
-
-        findViewById<TextView>(R.id.task_name_detail).text = nombre
-
-        val rootView = findViewById<View>(R.id.main)
-        findAndReplaceLoremIpsum(rootView, descripcion, presupuesto)
-
-        saveSubtaskToFirestore(nombre, descripcion, presupuesto)
-
         val eventId = intent.getStringExtra("eventoId")
         val taskId = intent.getStringExtra("tareaId")
         val subtaskId = intent.getStringExtra("subtareaId")
+
+        if (eventId != null && taskId != null && subtaskId != null) {
+            fetchSubtaskFromFirestore(eventId, taskId, subtaskId)
+            fetchSuppliers(eventId, taskId, subtaskId)
+        }
 
         findViewById<AppCompatButton>(R.id.btn_add_supplier).setOnClickListener {
             val intent = Intent(this, AddSupplier::class.java)
@@ -56,51 +51,75 @@ class SubtaskDetail : AppCompatActivity() {
         }
     }
 
-    /**
-     * Busca y reemplaza un TextView de ejemplo con la descripción y presupuesto reales.
-     *
-     * @param view Vista raíz desde donde se comienza a buscar.
-     * @param descripcion Descripción de la subtarea.
-     * @param presupuesto Presupuesto asignado.
-     */
-    private fun findAndReplaceLoremIpsum(view: View, descripcion: String, presupuesto: Int) {
-        if (view is TextView) {
-            val loremText = getString(R.string.eg_text_lorem)
-            if (view.text.toString() == loremText) {
-                view.text = "$descripcion\n\nPresupuesto: $$presupuesto"
-                return
-            }
-        }
+    private fun fetchSubtaskFromFirestore(eventId: String, taskId: String, subtaskId: String) {
+        val subtaskRef = db.collection("Eventos")
+            .document(eventId)
+            .collection("Tareas")
+            .document(taskId)
+            .collection("Subtareas")
+            .document(subtaskId)
 
-        if (view is ViewGroup) {
-            for (i in 0 until view.childCount) {
-                findAndReplaceLoremIpsum(view.getChildAt(i), descripcion, presupuesto)
-            }
-        }
-    }
+        subtaskRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val nombre = document.getString("nombre") ?: "Sin nombre"
+                    val descripcion = document.getString("descripcion") ?: "Sin descripción"
+                    val presupuesto = document.getLong("presupuesto")?.toInt() ?: 0
 
-    /**
-     * Guarda la subtarea en la colección "subtasks" de Firestore.
-     * Nota: este guardado es genérico y no está vinculado directamente a un evento/tarea/subtarea.
-     *
-     * @param nombre Nombre de la subtarea.
-     * @param descripcion Descripción de la subtarea.
-     * @param presupuesto Presupuesto asignado.
-     */
-    private fun saveSubtaskToFirestore(nombre: String, descripcion: String, presupuesto: Int) {
-        val subtaskData = hashMapOf(
-            "nombre" to nombre,
-            "descripcion" to descripcion,
-            "presupuesto" to presupuesto
-        )
-
-        db.collection("subtasks")
-            .add(subtaskData)
-            .addOnSuccessListener { documentReference ->
-                println("Subtarea añadida con ID: ${documentReference.id}")
+                    findViewById<TextView>(R.id.task_name_detail).text = nombre
+                    findViewById<TextView>(R.id.task_description_detail).text = descripcion
+                } else {
+                    println("No se encontró la subtarea.")
+                }
             }
             .addOnFailureListener { e ->
-                println("Error al añadir subtarea: $e")
+                println("Error al obtener subtarea: $e")
             }
     }
+
+    private fun fetchSuppliers(eventId: String, taskId: String, subtaskId: String) {
+        val supplierRef = db.collection("Eventos")
+            .document(eventId)
+            .collection("Tareas")
+            .document(taskId)
+            .collection("Subtareas")
+            .document(subtaskId)
+            .collection("Proveedor")
+
+        supplierRef.get()
+            .addOnSuccessListener { result ->
+                val tableLayout = findViewById<TableLayout>(R.id.table_suppliers)
+                val suppliers = result.documents.take(3)
+
+                for (doc in suppliers) {
+                    val nombre = doc.getString("nombre") ?: "Sin nombre"
+                    val precio = doc.getLong("precio")?.toString() ?: "0"
+
+                    val tableRow = TableRow(this)
+
+                    val nameView = TextView(this).apply {
+                        text = nombre
+                        setPadding(4, 4, 4, 4)
+                        setTextColor(resources.getColor(R.color.black, null))
+                        typeface = ResourcesCompat.getFont(this@SubtaskDetail, R.font.kanit_regular)
+                    }
+
+                    val budgetView = TextView(this).apply {
+                        text = precio
+                        setPadding(4, 4, 4, 4)
+                        setTextColor(resources.getColor(R.color.black, null))
+                        typeface = ResourcesCompat.getFont(this@SubtaskDetail, R.font.kanit_regular)
+                    }
+
+                    tableRow.addView(nameView)
+                    tableRow.addView(budgetView)
+                    tableLayout.addView(tableRow)
+                }
+            }
+            .addOnFailureListener { e ->
+                println("Error al obtener proveedores: $e")
+            }
+    }
+
+
 }
