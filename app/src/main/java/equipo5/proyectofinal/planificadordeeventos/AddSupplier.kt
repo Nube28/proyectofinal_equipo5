@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 /**
  * Actividad que permite al usuario agregar un nuevo proveedor.
  */
+
 class AddSupplier : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
@@ -25,12 +26,12 @@ class AddSupplier : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_add_supplier)
 
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
@@ -46,6 +47,10 @@ class AddSupplier : AppCompatActivity() {
         val etProductPrice = findViewById<EditText>(R.id.et_product_price)
         val tvProviderNameSpace = findViewById<TextView>(R.id.et_provider_name_space)
         val btnRegisterSupplier = findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btn_register_supplier)
+
+        // 🔥 Nuevo: obtener el nombre de la categoría desde el intent
+        val tituloProveedor = intent.getStringExtra("tituloProveedor") ?: "Proveedor"
+        tvProviderNameSpace.text = tituloProveedor
 
         btnRegisterSupplier.setOnClickListener {
             val nombreProveedor = etProviderName.text.toString().trim()
@@ -67,8 +72,6 @@ class AddSupplier : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            tvProviderNameSpace.text = nombreProveedor
-
             val proveedor = hashMapOf(
                 "nombre" to nombreProveedor,
                 "precio" to precioProducto,
@@ -79,7 +82,6 @@ class AddSupplier : AppCompatActivity() {
             val eventoId = intent.getStringExtra("eventoId")
             val tareaId = intent.getStringExtra("tareaId")
             val subTareaId = intent.getStringExtra("subtareaId")
-
 
             db.collection("Eventos").document(eventoId.toString())
                 .collection("Tareas").document(tareaId.toString())
