@@ -40,11 +40,13 @@ class AddSupplier : AppCompatActivity() {
             finish()
             return
         }
-        val uid = currentUser.uid
+
+        val subtareaNombre = intent.getStringExtra("subtareaNombre")
 
         val etProviderName = findViewById<EditText>(R.id.et_provider_name)
         val etProductPrice = findViewById<EditText>(R.id.et_product_price)
         val tvProviderNameSpace = findViewById<TextView>(R.id.et_provider_name_space)
+        tvProviderNameSpace.text = subtareaNombre
         val btnRegisterSupplier = findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btn_register_supplier)
 
         btnRegisterSupplier.setOnClickListener {
@@ -67,7 +69,6 @@ class AddSupplier : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            tvProviderNameSpace.text = nombreProveedor
 
             val proveedor = hashMapOf(
                 "nombre" to nombreProveedor,

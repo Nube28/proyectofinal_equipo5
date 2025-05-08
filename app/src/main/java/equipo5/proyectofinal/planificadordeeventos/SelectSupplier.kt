@@ -58,8 +58,20 @@ class SelectSupplier : AppCompatActivity() {
 
         val btn_register_supplier: Button = findViewById(R.id.btn_register_supplier)
         btn_register_supplier.setOnClickListener {
-            startActivity(Intent(this, AddSupplier::class.java))
+            var intent: Intent = Intent(this, AddSupplier::class.java)
+            intent.putExtra("eventoId",eventoId)
+            intent.putExtra("tareaId",tareaId)
+            intent.putExtra("subtareaId",subtareaId)
+            startActivity(intent)
         }
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        val eventoId = intent.getStringExtra("eventoId")
+        val tareaId = intent.getStringExtra("tareaId")
+        val subtareaId = intent.getStringExtra("subtareaId")
+        cargarProveedoresDesdeSubtarea(eventoId.toString(), tareaId.toString(), subtareaId.toString())
     }
 
     /**
@@ -145,6 +157,8 @@ class SelectSupplier : AppCompatActivity() {
                     .addOnFailureListener {
                         Toast.makeText(context, "Error al actualizar proveedor", Toast.LENGTH_SHORT).show()
                     }
+
+                finish()
             }
 
             return view

@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class SubtaskDetail : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
+    private lateinit var nombre: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +48,12 @@ class SubtaskDetail : AppCompatActivity() {
             intent.putExtra("eventoId", eventId)
             intent.putExtra("tareaId", taskId)
             intent.putExtra("subtareaId", subtaskId)
+            intent.putExtra("subtareaNombre", nombre)
             startActivity(intent)
         }
     }
 
-    private fun fetchSubtaskFromFirestore(eventId: String, taskId: String, subtaskId: String) {
+    private fun  fetchSubtaskFromFirestore(eventId: String, taskId: String, subtaskId: String) {
         val subtaskRef = db.collection("Eventos")
             .document(eventId)
             .collection("Tareas")
@@ -62,12 +64,17 @@ class SubtaskDetail : AppCompatActivity() {
         subtaskRef.get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    val nombre = document.getString("nombre") ?: "Sin nombre"
+                    nombre = document.getString("nombre") ?: "Sin nombre"
                     val descripcion = document.getString("descripcion") ?: "Sin descripción"
                     val presupuesto = document.getLong("presupuesto")?.toInt() ?: 0
 
                     findViewById<TextView>(R.id.task_name_detail).text = nombre
-                    findViewById<TextView>(R.id.task_description_detail).text = descripcion
+                    findViewById<TextView>(R.id.task_description_detail).text =
+                        buildString {
+                            append(descripcion)
+                            append(" con un presupuesto estimado de $")
+                            append(presupuesto)
+                        }
                 } else {
                     println("No se encontró la subtarea.")
                 }

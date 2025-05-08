@@ -217,6 +217,9 @@ class EventDetail : AppCompatActivity() {
                 textSubTask.text = "${subTask.name} - ${subTask.cost}"
                 checkBoxSubTask.isChecked = subTask.isChecked
 
+                checkBoxSubTask.setOnCheckedChangeListener(null)
+                checkBoxSubTask.isChecked = subTask.isChecked
+
                 checkBoxSubTask.setOnCheckedChangeListener { _, isChecked ->
                     subTask.isChecked = isChecked
                     db.collection("Eventos").document(eventId)
@@ -224,11 +227,27 @@ class EventDetail : AppCompatActivity() {
                         .collection("Subtareas").document(subTask.id)
                         .update("terminado", isChecked)
 
-                    var intent: Intent = Intent(context, SelectSupplier::class.java)
-                    intent.putExtra("eventoId",eventId)
-                    intent.putExtra("tareaId",subTask.taskId)
-                    intent.putExtra("subtareaId",subTask.id)
-                    context.startActivity(intent)
+                    if (isChecked) {
+                        val intent = Intent(context, SelectSupplier::class.java)
+                        intent.putExtra("eventoId", eventId)
+                        intent.putExtra("tareaId", subTask.taskId)
+                        intent.putExtra("subtareaId", subTask.id)
+                        context.startActivity(intent)
+                    } else {
+                        val proveedorRef = db.collection("Eventos").document(eventId)
+                            .collection("Tareas").document(subTask.taskId)
+                            .collection("Subtareas").document(subTask.id)
+                            .collection("Proveedor")
+
+                        proveedorRef.whereEqualTo("seleccionado", true)
+                            .get()
+                            .addOnSuccessListener { documents ->
+                                for (doc in documents) {
+                                    proveedorRef.document(doc.id)
+                                        .update("seleccionado", false)
+                                }
+                            }
+                    }
                 }
 
                 subTaskContainer.addView(subTaskView)
