@@ -62,7 +62,6 @@ class AddSubtask : AppCompatActivity() {
                 "terminado" to false
             )
 
-
             val eventoId = intent.getStringExtra("eventoId")
             val tareaId = intent.getStringExtra("tareaId")
 
@@ -75,6 +74,7 @@ class AddSubtask : AppCompatActivity() {
                     etNombre.text.clear()
                     etDescripcion.text.clear()
                     etPresupuesto.text.clear()
+                    finish() // Cierra la actividad después de guardar
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Error al guardar: ${e.message}", Toast.LENGTH_LONG).show()
