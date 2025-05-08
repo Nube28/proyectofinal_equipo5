@@ -44,8 +44,7 @@ class ChangePasswordActivity : AppCompatActivity() {
      * Funcion que envia un email para cambiar la contraseña del usuario.
      */
     private fun resetPassword(){
-        auth.setLanguageCode("it")
-        auth.setLanguageCode("it")
+        auth.setLanguageCode("es")
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

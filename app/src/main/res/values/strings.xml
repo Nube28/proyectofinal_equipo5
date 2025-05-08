@@ -28,7 +28,7 @@
     <string name="lb_optional">(Opcional)</string>
     <string name="lb_event_type">Tipo de evento:</string>
     <string name="title_account_config">CONFIGURACIÓN DE\nLA CUENTA</string>
-    <string name="btn_edit_profile">Editar perfil</string>
+    <string name="btn_edit_profile">Cambiar Correo</string>
     <string name="btn_signout"><u>Cerrar Sesión</u></string>
     <string name="btn_change_password">Cambiar contraseña</string>
     <string name="title_budget">Presupuesto estimado</string>
@@ -90,6 +90,7 @@
     <string name="name_profile">Nombre:</string>
     <string name="hint_name_profile">Default.</string>
     <string name="email_profile">Correo electrónico:</string>
+    <string name="email_new">Nuevo correo:</string>
     <string name="hint_email_profile">example@gmail.com</string>
     <string name="button_save">Guardar</string>
     <string name="title_password">Cambiar\nContraseña</string>
