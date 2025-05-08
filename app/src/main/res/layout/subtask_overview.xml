@@ -16,11 +16,12 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/check_subtask"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@drawable/checkbox_selector"/>
+            android:padding="5dp"
+            android:src="@drawable/ic_star" />
+
 
         <LinearLayout
             android:id="@+id/btn_subtask"
@@ -34,6 +35,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/eg_subtask"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textAlignment="center"
+                android:textSize="@dimen/title_size"
+                android:fontFamily="@string/typo_normal_text"
                 android:textColor="@color/black"
                 />
 
@@ -46,6 +52,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sym_money"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="normal"
+                    android:fontFamily="@string/typo_normal_text"
+                    android:textAlignment="center"
+                    android:padding="2dp"
+                    android:layout_marginStart="25dp"
                     android:textColor="@color/black"
                     />
 
@@ -54,9 +66,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/eg_event_budget"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="normal"
+                    android:fontFamily="@string/typo_normal_text"
+                    android:textAlignment="center"
+                    android:padding="2dp"
+                    android:layout_marginStart="2dp"
                     android:textColor="@color/black"
                     />
-
             </LinearLayout>
 
         </LinearLayout>
@@ -67,7 +84,6 @@
             android:layout_height="@dimen/img_arrow_right"
             android:src="@drawable/ic_arrow_left"
             android:layout_gravity="center"
-
             />
     </LinearLayout>
 

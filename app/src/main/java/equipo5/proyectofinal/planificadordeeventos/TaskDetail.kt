@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.CheckBox
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -41,6 +42,8 @@ class TaskDetail : AppCompatActivity() {
 
         val eventId = intent.getStringExtra("eventoId")
         val taskId = intent.getStringExtra("tareaId")
+
+        cargarNombreTarea()
 
         btn_add_subtask.setOnClickListener {
             val intent: Intent = Intent(this, AddSubtask::class.java)
@@ -93,6 +96,31 @@ class TaskDetail : AppCompatActivity() {
                 Toast.makeText(this, "Error al cargar subtareas", Toast.LENGTH_SHORT).show()
             }
     }
+
+    private fun cargarNombreTarea() {
+        val eventId = intent.getStringExtra("eventoId") ?: return
+        val taskId = intent.getStringExtra("tareaId") ?: return
+        val taskNameTextView = findViewById<TextView>(R.id.task_name_detail)
+
+        db.collection("Eventos")
+            .document(eventId)
+            .collection("Tareas")
+            .document(taskId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val nombreTarea = document.getString("nombre") ?: "Tarea"
+                    taskNameTextView.text = nombreTarea
+                } else {
+                    taskNameTextView.text = "Tarea no encontrada"
+                }
+            }
+            .addOnFailureListener {
+                taskNameTextView.text = "Error al cargar nombre"
+                Toast.makeText(this, "No se pudo cargar el nombre de la tarea", Toast.LENGTH_SHORT).show()
+            }
+    }
+
 
     /**
      * Adaptador para mostrar elementos de subtareas en un ListView.
