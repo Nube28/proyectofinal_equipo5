@@ -49,6 +49,8 @@
         android:background="@color/fondo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/bargraphs"
         android:columnCount="2">
 
@@ -93,6 +95,8 @@
 
     <LinearLayout
         android:layout_marginTop="@dimen/margin_top_Graph"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/fondo"
@@ -102,7 +106,7 @@
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/seventeen"
+        android:layout_marginLeft="60dp"
         android:id="@+id/graph">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
