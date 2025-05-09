@@ -53,6 +53,18 @@ class SubtaskDetail : AppCompatActivity() {
         }
     }
 
+    public override fun onResume(){
+        super.onResume()
+        val eventId = intent.getStringExtra("eventoId")
+        val taskId = intent.getStringExtra("tareaId")
+        val subtaskId = intent.getStringExtra("subtareaId")
+
+        if (eventId != null && taskId != null && subtaskId != null) {
+            fetchSubtaskFromFirestore(eventId, taskId, subtaskId)
+            fetchSuppliers(eventId, taskId, subtaskId)
+        }
+    }
+
     private fun  fetchSubtaskFromFirestore(eventId: String, taskId: String, subtaskId: String) {
         val subtaskRef = db.collection("Eventos")
             .document(eventId)
