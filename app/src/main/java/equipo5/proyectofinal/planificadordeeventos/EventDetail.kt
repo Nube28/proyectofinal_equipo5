@@ -37,6 +37,9 @@ class EventDetail : AppCompatActivity() {
     private lateinit var txtEventBudget: TextView
     private var eventId: String? = null
 
+    private lateinit var adapter: TaskAdapter
+    private var taskList: MutableList<TaskItem> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,7 +54,8 @@ class EventDetail : AppCompatActivity() {
         txtEventBudget = findViewById(R.id.event_budget_detail)
         eventId = intent.getStringExtra("eventId")
 
-        val tasks = mutableListOf<TaskItem>()
+        adapter = TaskAdapter(this, taskList, eventId ?: "")
+        listView.adapter = adapter
 
         if (eventId != null) {
             loadDataEvent()
@@ -139,8 +143,9 @@ class EventDetail : AppCompatActivity() {
 
                                         tareasCargadas++
                                         if (tareasCargadas == tareasTotales) {
-                                            val adapter = TaskAdapter(this, tempTasks, eventId.toString())
-                                            listView.adapter = adapter
+                                            taskList.clear()
+                                            taskList.addAll(tempTasks)
+                                            adapter.notifyDataSetChanged()
                                         }
                                     }
                             }
@@ -181,11 +186,8 @@ class EventDetail : AppCompatActivity() {
             val subTaskContainer = view.findViewById<LinearLayout>(R.id.subtask_container)
 
             val task = taskList[position]
-            textMainTask.text = "${task.name} - ${task.cost}"
+            checkBoxMain.setOnCheckedChangeListener(null)
             checkBoxMain.isChecked = task.isChecked
-            subTaskContainer.visibility = if (task.isExpanded) View.VISIBLE else View.GONE
-            arrowExpand.setImageResource(if (task.isExpanded) R.drawable.ic_arrow_down else R.drawable.ic_arrow_up)
-
             checkBoxMain.setOnCheckedChangeListener { _, isChecked ->
                 task.isChecked = isChecked
                 db.collection("Eventos").document(eventId)
@@ -193,17 +195,22 @@ class EventDetail : AppCompatActivity() {
                     .update("terminado", isChecked)
             }
 
-            textMainTask.setOnClickListener {
-                val intent: Intent = Intent(context, TaskDetail::class.java)
-                intent.putExtra("eventoId", eventId)
-                intent.putExtra("tareaId", task.id)
-                context.startActivity(intent)
+            textMainTask.text = "${task.name} - ${task.cost}"
 
-            }
-
+            subTaskContainer.visibility = if (task.isExpanded) View.VISIBLE else View.GONE
+            arrowExpand.setImageResource(
+                if (task.isExpanded) R.drawable.ic_arrow_down
+                else R.drawable.ic_arrow_up
+            )
+            
             arrowExpand.setOnClickListener {
                 task.isExpanded = !task.isExpanded
-                notifyDataSetChanged()
+
+                subTaskContainer.visibility = if (task.isExpanded) View.VISIBLE else View.GONE
+                arrowExpand.setImageResource(
+                    if (task.isExpanded) R.drawable.ic_arrow_down
+                    else R.drawable.ic_arrow_up
+                )
             }
 
             subTaskContainer.removeAllViews()
