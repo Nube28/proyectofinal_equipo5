@@ -185,7 +185,7 @@ class EventStatistics : AppCompatActivity() {
      */
     private fun setBarWidth(bar: View, percentage: Int, color: Int) {
         val params = bar.layoutParams
-        params.width = (300 * percentage / 100)
+        params.width = maxOf(20, (300 * percentage / 100))
         bar.layoutParams = params
         bar.setBackgroundColor(color)
     }
