@@ -197,6 +197,14 @@ class EventDetail : AppCompatActivity() {
 
             textMainTask.text = "${task.name} - ${task.cost}"
 
+            textMainTask.setOnClickListener {
+                val intent: Intent = Intent(context, TaskDetail::class.java)
+                intent.putExtra("eventoId", eventId)
+                intent.putExtra("tareaId", task.id)
+                context.startActivity(intent)
+
+            }
+
             subTaskContainer.visibility = if (task.isExpanded) View.VISIBLE else View.GONE
             arrowExpand.setImageResource(
                 if (task.isExpanded) R.drawable.ic_arrow_down
