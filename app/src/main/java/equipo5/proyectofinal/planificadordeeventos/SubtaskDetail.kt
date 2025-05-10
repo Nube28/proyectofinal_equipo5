@@ -105,12 +105,14 @@ class SubtaskDetail : AppCompatActivity() {
             .document(subtaskId)
             .collection("Proveedor")
 
-        supplierRef.get()
+        supplierRef.orderBy("nombre")
+            .limit(3)
+            .get()
             .addOnSuccessListener { result ->
                 val tableLayout = findViewById<TableLayout>(R.id.table_suppliers)
-                val suppliers = result.documents.take(3)
+                tableLayout.removeAllViews()
 
-                for (doc in suppliers) {
+                for (doc in result) {
                     val nombre = doc.getString("nombre") ?: "Sin nombre"
                     val precio = doc.getLong("precio")?.toString() ?: "0"
 
@@ -139,6 +141,7 @@ class SubtaskDetail : AppCompatActivity() {
                 println("Error al obtener proveedores: $e")
             }
     }
+
 
 
 }
